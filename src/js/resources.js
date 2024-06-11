@@ -6,6 +6,7 @@ import { ImageSource, Sound, Resource, Loader } from 'excalibur'
 const Resources = {
     // Player Resources
     Fish: new ImageSource('images/fish.png'),
+    Platform: new ImageSource('images/ground.png'),
 
     //Enemy Resources
 
