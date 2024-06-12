@@ -9,6 +9,7 @@ const Resources = {
     Fish: new ImageSource('images/fish.png'),
     Platform: new ImageSource('images/ground.png'),
     Mast: new ImageSource('images/background.jpg'),
+    Cloud: new ImageSource('images/cloudd.png')
 
     //Enemy Resources
 
