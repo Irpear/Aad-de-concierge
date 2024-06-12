@@ -10,11 +10,11 @@ export class platformManager extends Actor
     maxAngle= 150
     distanceY= 280
     distanceX= 600
-    pox = 500
-    poy = 600
+    pox = 300
+    poy = 720
 
-    minX = -150
-    maxX = 1025
+    minX = 50
+    maxX = 1400
 
     constructor()
     {
@@ -23,7 +23,7 @@ export class platformManager extends Actor
     onInitialize()
     {
         super.onInitialize()
-        for(let i = 0;i<113;i++)
+        for(let i = 0;i<51;i++)
         {
         this.spawnNextPlatform();
         }
@@ -52,6 +52,6 @@ export class platformManager extends Actor
         platform.CollisionGroup= 0b0100;
         this.scene.add(platform);
         this.platforms.push(platform);
-        console.log(platform,pos);
+       // console.log(platform,pos);
     }
 }

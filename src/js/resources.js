@@ -8,7 +8,7 @@ const Resources = {
     // Player Resources
     Fish: new ImageSource('images/fish.png'),
     Platform: new ImageSource('images/ground.png'),
-    Mast: new ImageSource('images/background.jpg'),
+    Mast: new ImageSource('images/Background.png'),
     Cloud: new ImageSource('images/cloudd.png')
 
     //Enemy Resources

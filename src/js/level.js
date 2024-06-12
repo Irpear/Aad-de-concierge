@@ -4,6 +4,7 @@ import { Player } from "./player";
 import { Projectile } from "./projectile";
 import { Resources } from "./resources";
 import { platformManager } from "./platformManager";
+import { cameraFollow } from "./cameraFollow";
 
 
 export class Level extends Scene {
@@ -11,8 +12,7 @@ export class Level extends Scene {
         // Voeg background nog toe.
         const background = new Actor;
         background.graphics.use(Resources.Mast.toSprite());
-        background.scale = new Vector(5,5)
-        background.pos= new Vector(400,-14000)
+        background.pos= new Vector(720,-5450)
         this.add(background);
         //Haha i won't change this
         this.goku = new Player()
@@ -21,20 +21,19 @@ export class Level extends Scene {
 
 
         const smallEnemy = new Projectile()
-        smallEnemy.pos = new Vector(-150,300)
+        smallEnemy.pos = new Vector(470,300)
         this.add(smallEnemy)
 
         const smallEnemy2 = new Projectile()
-        smallEnemy2.pos = new Vector(1025,300)
+        smallEnemy2.pos = new Vector(1000,300)
         this.add(smallEnemy2)
-        
-
+    
 
         //it should later go to platform manager class
 
         const platformGroup = new CollisionGroup('platform',0b0100,0b0100)
         const platform = new Actor()
-        platform.pos = new Vector(400,600)
+        platform.pos = new Vector(720,600)
         platform.graphics.use(Resources.Platform.toSprite())
         platform.collider.set(Shape.Box(128,32))
         platform.scale=new Vector(15,3);
@@ -43,7 +42,12 @@ export class Level extends Scene {
         this.add(platform);
         let pmanager = new platformManager();
         this.add(pmanager);
-        this.camera.strategy.lockToActor(this.goku);
+        
+        const camFollow = new cameraFollow();
+        camFollow.pos = new Vector(720,400);
+        camFollow.player = this.goku;
+        this.add(camFollow);
+        this.camera.strategy.lockToActor(camFollow);
 
         
     }
