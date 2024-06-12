@@ -23,7 +23,7 @@ export class platformManager extends Actor
     onInitialize()
     {
         super.onInitialize()
-        for(let i = 0;i<20;i++)
+        for(let i = 0;i<113;i++)
         {
         this.spawnNextPlatform();
         }
@@ -32,7 +32,7 @@ export class platformManager extends Actor
     }
     spawnNextPlatform()
     {
-        let chosenAngle = mathFunction.Lerp(this.minAngle,this.maxAngle,Math.random())            *0.01745329;
+        let chosenAngle = mathFunction.Lerp(this.minAngle,this.maxAngle,Math.random())*0.01745329;
         console.log(chosenAngle);
         let xc = Math.cos(chosenAngle)*this.distanceX;
         let yc = -Math.sin(chosenAngle)*this.distanceY;

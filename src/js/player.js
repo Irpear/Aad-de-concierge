@@ -62,10 +62,10 @@ export class Player extends Actor {
     pMove(delta)
     {
         let xvel = mathFunction.Lerp(this.vel.x,this.xspeed,delta*0.005);
-        let yvel = 1000;//= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
+        let yvel = mathFunction.Lerp(this.vel.y,1000,delta*0.01);//= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
      //   const groundCheck = new Ray(this.pos,new Vector(0,1))
 
-        if(this.doJump && !this.isJumping)
+        if(this.doJump && !this.isJumping && Math.abs(this.vel.y)<0.01)
             {
                // const groundCheck = new Ray(this.pos,new Vector(0,1))
               //  console.log(this.scene.physics.rayCast(groundCheck,{ignoreCollisionGroupAll: true,maxDistance: 60,collisionMask:0b0100,filter:()=>{return true}}));
@@ -81,11 +81,18 @@ export class Player extends Actor {
              let jt = Math.sqrt(mathFunction.quadraticFormula(-1,0,1,this.jumpTime/this.jumpDuration));
               yvel = mathFunction.Lerp(1000,-this.jumpSpeed,jt)
               //  console.log(this.jumpTime);
-               this.jumpTime+=delta/1000;
+              if(this.jumpTime>0.1 && Math.abs(this.vel.y)<0.01)
+                {
+                    this.isJumping = false;
+                    yvel = 1000
+                } 
+              this.jumpTime+=delta/1000;
                if(this.jumpTime>this.jumpDuration)
                 {
                     this.isJumping=false;
+                    //yvel = 1000;
                 }
+                
             }
         this.vel = new Vector(xvel,yvel);
     }
