@@ -12,7 +12,7 @@ export class platformManager extends Actor
     distanceX= 600
     pox = 500
     poy = 600
-    
+
     minX = -150
     maxX = 1025
 
@@ -23,7 +23,7 @@ export class platformManager extends Actor
     onInitialize()
     {
         super.onInitialize()
-        for(let i = 0;i<1000;i++)
+        for(let i = 0;i<20;i++)
         {
         this.spawnNextPlatform();
         }
