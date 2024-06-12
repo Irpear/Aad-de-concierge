@@ -8,7 +8,7 @@ export class platformManager extends Actor
     platforms = [];
     minAngle=45
     maxAngle=135
-    distance=256
+    distance=128
     pox = 500
     poy = 500
 
@@ -36,7 +36,7 @@ export class platformManager extends Actor
         platform.graphics.use(Resources.Platform.toSprite())
         platform.pos = pos//new Vector(500,200);
         platform.collider.set(Shape.Box(128,32))
-        platform.scale=new Vector(2,3);
+        platform.scale=new Vector(2,1);
         platform.body.collisionType=CollisionType.Fixed;
         platform.CollisionGroup= 0b0100;
         this.scene.add(platform);

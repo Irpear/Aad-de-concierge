@@ -33,6 +33,7 @@ export class Level extends Scene {
         this.add(platform);
         let pmanager = new platformManager();
         this.add(pmanager);
+        this.camera.strategy.lockToActor(this.goku);
     }
 
     onActivate(ctx) {
