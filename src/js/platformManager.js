@@ -11,7 +11,7 @@ export class platformManager extends Actor
     distanceY= 280
     distanceX= 600
     pox = 720
-    poy = 520
+    poy = 535
 
     minX = 50
     maxX = 1400
