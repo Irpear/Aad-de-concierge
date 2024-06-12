@@ -24,11 +24,9 @@ export class Player extends Actor {
     onInitialize(engine) {
         this.game = engine;
         this.graphics.use(Resources.Fish.toSprite())
-        this.pos = new Vector(0, 0)
-        this.vel = new Vector(0, 0)
-        this.collider.set(Shape.Box(64,64))
+        this.collider.set(Shape.Box(64,64)) // Makes sure that the Player stand on the platform and doesnt merge with the platform
         this.body.collisionType=CollisionType.Active;
-        this.vel=new Vector(0,1000);
+        this.vel=new Vector(0,1000); // Causes to fall down and land on the ground instead of spawning in the top of the screen.
     }
 
 
