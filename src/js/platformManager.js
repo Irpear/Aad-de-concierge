@@ -9,6 +9,8 @@ export class platformManager extends Actor
     minAngle=45
     maxAngle=135
     distance=256
+    pox = 500
+    poy = 500
 
     constructor()
     {
@@ -27,7 +29,9 @@ export class platformManager extends Actor
         console.log(chosenAngle);
         let xc = Math.cos(chosenAngle)*this.distance;
         let yc = -Math.sin(chosenAngle)*this.distance;
-        let pos = new Vector(xc+400,yc+600);
+        let pos = new Vector(xc+this.pox,yc+this.poy);
+        this.pox = pos.x;
+        this.poy = pos.y;
         let platform = new Actor();
         platform.graphics.use(Resources.Platform.toSprite())
         platform.pos = pos//new Vector(500,200);
