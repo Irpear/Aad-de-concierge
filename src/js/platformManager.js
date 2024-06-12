@@ -11,7 +11,7 @@ export class platformManager extends Actor
     distanceY= 280
     distanceX= 600
     pox = 720
-    poy = 535
+    poy = 300
 
     minX = 50
     maxX = 1400
@@ -22,8 +22,23 @@ export class platformManager extends Actor
     }
     onInitialize()
     {
+        let yp = this.poy;
+        let xp = mathFunction.Lerp(this.minX,this.maxX,Math.random());
+
+        let pos = new Vector(xp,yp);
+        this.pox = pos.x;
+        this.poy = pos.y;
+        let platform = new Actor();
+        platform.graphics.use(Resources.Platform.toSprite())
+        platform.pos = pos//new Vector(500,200);
+        platform.collider.set(Shape.Box(128,32))
+        platform.scale=new Vector(2,1);
+        platform.body.collisionType=CollisionType.Fixed;
+        this.scene.add(platform);
+        this.platforms.push(platform);
+
         super.onInitialize()
-        for(let i = 0;i<51;i++)
+        for(let i = 0;i<50;i++)
         {
         this.spawnNextPlatform();
         }
@@ -49,7 +64,6 @@ export class platformManager extends Actor
         platform.collider.set(Shape.Box(128,32))
         platform.scale=new Vector(2,1);
         platform.body.collisionType=CollisionType.Fixed;
-        platform.CollisionGroup= 0b0100;
         this.scene.add(platform);
         this.platforms.push(platform);
        // console.log(platform,pos);
