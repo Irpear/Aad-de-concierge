@@ -5,6 +5,7 @@ import { Projectile } from "./projectile";
 import { Resources } from "./resources";
 import { platformManager } from "./platformManager";
 import { cameraFollow } from "./cameraFollow";
+import { wolkManager } from "./wolkManager";
 
 
 export class Level extends Scene {
@@ -49,7 +50,8 @@ export class Level extends Scene {
         this.add(camFollow);
         this.camera.strategy.lockToActor(camFollow);
 
-        
+        let cmanager = new wolkManager();
+        this.add(cmanager);
     }
 
     onActivate(ctx) {

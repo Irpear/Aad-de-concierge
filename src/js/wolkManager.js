@@ -1,12 +1,15 @@
-import { Actor } from "excalibur";
+import { Actor, Vector } from "excalibur";
 import { mathFunction } from "./mathFunctions";
+import { Resources } from "./resources";
 
 export class wolkManager extends Actor
 {
     cloudList=[]
     cloudAmount=20;
-    minY
-    maxY
+    minYp=-5000
+    maxYp=-10000
+    minXv=50
+    maxXv=250
 
     constructor()
     {
@@ -15,21 +18,36 @@ export class wolkManager extends Actor
     onInitialize()
     {
         super.onInitialize();
+        this.spawnCloud();
     }
     onPreUpdate()
     {
-
+        this.recycleCloud();
     }
     spawnCloud()
     {
         for(let i = 0;i<this.cloudAmount;i++)
         {
-            let ypos = mathFunction.Lerp(this.minY,this.maxY,Math.random());
-            let xpos
+            let ypos = mathFunction.Lerp(this.minYp,this.maxYp,Math.random());
+            let xvel = mathFunction.Lerp(this.minXv,this.maxXv,Math.random());
+            let cloud = new Actor();
+            cloud.graphics.use(Resources.Cloud.toSprite());
+            cloud.pos = new Vector(-100,ypos);
+            cloud.vel = new Vector(xvel,0);
+            cloud.z =-1;
+            this.scene.add(cloud);
+            this.cloudList.push(cloud);
         }
     }
-    handleCloudMovement()
+    recycleCloud()
     {
-        
+        for(let i =0;i<this.cloudAmount;i++)
+        if(this.cloudList[i].pos.x>1600)
+            {
+                let ypos = mathFunction.Lerp(this.minYp,this.maxYp,Math.random());
+                let xvel = mathFunction.Lerp(this.minXv,this.maxXv,Math.random());
+                this.cloudList[i].pos = new Vector(-100,ypos);
+                this.cloudList[i].vel = new Vector(xvel,0)
+            }
     }
 }

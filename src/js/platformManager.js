@@ -10,8 +10,8 @@ export class platformManager extends Actor
     maxAngle= 150
     distanceY= 280
     distanceX= 600
-    pox = 300
-    poy = 720
+    pox = 720
+    poy = 500
 
     minX = 50
     maxX = 1400
