@@ -25,10 +25,10 @@ export class Player extends Actor {
         this.game = engine;
         this.graphics.use(Resources.Fish.toSprite())
         this.pos = new Vector(0, 0)
-        this.vel = new Vector(0, 0)
+       // this.vel = new Vector(0, 0)
         this.collider.set(Shape.Box(64,64))
         this.body.collisionType=CollisionType.Active;
-        this.vel=new Vector(0,1000);
+       // this.vel=new Vector(0,1000);
     }
 
 

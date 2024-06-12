@@ -11,6 +11,6 @@ export class mathFunction
     //Quadratic formula with the form a(x-b)^2+c
     static quadraticFormula(a,b,c,x)
     {
-        return a*((x-b)*x-b)+c;
+        return a*((x-b)*(x-b))+c;
     }
 }
