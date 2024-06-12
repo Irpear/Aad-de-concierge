@@ -6,11 +6,12 @@ import { mathFunction } from "./mathFunctions";
 export class platformManager extends Actor
 {
     platforms = [];
-    minAngle=45
-    maxAngle=135
-    distance=128
+    minAngle=30
+    maxAngle= 140
+    distanceY= 280
+    distanceX= 600
     pox = 500
-    poy = 500
+    poy = 600
 
     constructor()
     {
@@ -19,16 +20,19 @@ export class platformManager extends Actor
     onInitialize()
     {
         super.onInitialize()
+        for(let i = 0;i<20;i++)
+        {
         this.spawnNextPlatform();
-        this.spawnNextPlatform();
-        this.spawnNextPlatform();
+        }
+        //this.spawnNextPlatform();
+        //this.spawnNextPlatform();
     }
     spawnNextPlatform()
     {
         let chosenAngle = mathFunction.Lerp(this.minAngle,this.maxAngle,Math.random())*0.01745329;
         console.log(chosenAngle);
-        let xc = Math.cos(chosenAngle)*this.distance;
-        let yc = -Math.sin(chosenAngle)*this.distance;
+        let xc = Math.cos(chosenAngle)*this.distanceX;
+        let yc = -Math.sin(chosenAngle)*this.distanceY;
         let pos = new Vector(xc+this.pox,yc+this.poy);
         this.pox = pos.x;
         this.poy = pos.y;
