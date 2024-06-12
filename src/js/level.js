@@ -3,6 +3,7 @@ import { Background } from "./background";
 import { Player } from "./player";
 import { Projectile } from "./projectile";
 import { Resources } from "./resources";
+import { platformManager } from "./platformManager";
 
 
 export class Level extends Scene {
@@ -30,6 +31,8 @@ export class Level extends Scene {
         platform.body.collisionType=CollisionType.Fixed;
         platform.CollisionGroup= 0b0100;
         this.add(platform);
+        let pmanager = new platformManager();
+        this.add(pmanager);
     }
 
     onActivate(ctx) {
