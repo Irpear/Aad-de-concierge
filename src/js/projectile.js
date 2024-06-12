@@ -10,7 +10,7 @@ export class Projectile extends Actor {
         console.log("Projectile is created")
 
         this.graphics.use(Resources.Fish.toSprite())
-        this.pos = new Vector(500, 300)
+       // this.pos = new Vector(500, 300)
 
 
         
