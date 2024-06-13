@@ -26,7 +26,7 @@ export class Player extends Actor {
         this.graphics.use(Resources.Fish.toSprite())
         this.collider.set(Shape.Box(64, 64)) // Makes sure that the Player stand on the platform and doesnt merge with the platform
         this.body.collisionType = CollisionType.Active;
-        this.pos = new Vector(720,300)
+        this.pos = new Vector(0,300)
         // Causes to fall down and land on the ground instead of spawning in the top of the screen.
     }
 
@@ -61,7 +61,8 @@ export class Player extends Actor {
     // Calculate and apply velocity
     pMove(delta) {
         let xvel = mathFunction.Lerp(this.vel.x, this.xspeed, delta * 0.005);
-        let yvel = mathFunction.Lerp(this.vel.y, 1000, delta * 0.01);//= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
+        let yvel = mathFunction.Lerp(this.vel.y, 1000, delta * 0.01);
+        //let yvel= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
         //   const groundCheck = new Ray(this.pos,new Vector(0,1))
 
         if (this.doJump && !this.isJumping && Math.abs(this.vel.y) < 0.01) {

@@ -10,11 +10,11 @@ export class platformManager extends Actor
     maxAngle= 150
     distanceY= 280
     distanceX= 600
-    pox = 720
+    pox = 0
     poy = 300
 
-    minX = 50
-    maxX = 1400
+    minX = -575
+    maxX = 575
 
     constructor()
     {
@@ -38,7 +38,7 @@ export class platformManager extends Actor
         this.platforms.push(platform);
 
         super.onInitialize()
-        for(let i = 0;i<50;i++)
+        for(let i = 0;i<100;i++)
         {
         this.spawnNextPlatform();
         }

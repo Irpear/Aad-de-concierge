@@ -5,9 +5,9 @@ import { Resources } from "./resources";
 export class wolkManager extends Actor
 {
     cloudList=[]
-    cloudAmount=20;
-    minYp=-5000
-    maxYp=-10000
+    cloudAmount=50;
+    minYp=-10000
+    maxYp=-25000
     minXv=50
     maxXv=250
 
@@ -32,7 +32,7 @@ export class wolkManager extends Actor
             let xvel = mathFunction.Lerp(this.minXv,this.maxXv,Math.random());
             let cloud = new Actor();
             cloud.graphics.use(Resources.Cloud.toSprite());
-            cloud.pos = new Vector(-100,ypos);
+            cloud.pos = new Vector(-1600,ypos);
             cloud.vel = new Vector(xvel,0);
             cloud.z =-1;
             this.scene.add(cloud);
@@ -46,7 +46,7 @@ export class wolkManager extends Actor
             {
                 let ypos = mathFunction.Lerp(this.minYp,this.maxYp,Math.random());
                 let xvel = mathFunction.Lerp(this.minXv,this.maxXv,Math.random());
-                this.cloudList[i].pos = new Vector(-100,ypos);
+                this.cloudList[i].pos = new Vector(-1600,ypos);
                 this.cloudList[i].vel = new Vector(xvel,0)
             }
     }
