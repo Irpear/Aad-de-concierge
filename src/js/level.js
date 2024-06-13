@@ -14,11 +14,25 @@ export class Level extends Scene {
     onInitialize(engine) {
         //TODO background Image is not centered if there is time over should be fixed
         // Voeg background nog toe.
-        const background = new Actor;
-        background.graphics.use(Resources.Mast1.toSprite());
-        background.pos= new Vector(0,-11450)
-        background.scale=new Vector(2,2)
-        this.add(background);
+        const mast3 = new Actor;
+        mast3.graphics.use(Resources.Mast3.toSprite());
+        mast3.pos= new Vector(12,-18500)
+        mast3.scale=new Vector(2,2)
+        this.add(mast3);
+
+        const mast1 = new Actor;
+        mast1.graphics.use(Resources.Mast1.toSprite());
+        mast1.pos= new Vector(0,-3400)
+        mast1.scale=new Vector(2,2)
+        this.add(mast1);
+
+        const mast2 = new Actor;
+        mast2.graphics.use(Resources.Mast2.toSprite());
+        mast2.pos= new Vector(12,-11400)
+        mast2.scale=new Vector(2,2)
+        this.add(mast2);
+
+     
 
 
         //Haha i won't change this
@@ -60,8 +74,8 @@ export class Level extends Scene {
 
         let cmanager = new wolkManager();
         this.add(cmanager);
-        //let timer = new gameTimer();
-       // this.add(timer);
+        let timer = new gameTimer();
+        this.add(timer);
     }
 
     onActivate(ctx) {

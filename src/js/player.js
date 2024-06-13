@@ -50,10 +50,10 @@ export class Player extends Actor {
             this.xspeed = 500
         }
         if (engine.input.keyboard.isHeld(Keys.Up) || engine.input.keyboard.isHeld(Keys.W)) {
-            this.yspeed = -500
+            this.yspeed = -1500
         }
         if (engine.input.keyboard.isHeld(Keys.Down) || engine.input.keyboard.isHeld(Keys.S)) {
-            this.yspeed = 500
+            this.yspeed = 1500
         }
         this.doJump = engine.input.keyboard.wasPressed(Keys.Space);
         // When the Spacebar is pressed jump 
@@ -61,8 +61,8 @@ export class Player extends Actor {
     // Calculate and apply velocity
     pMove(delta) {
         let xvel = mathFunction.Lerp(this.vel.x, this.xspeed, delta * 0.005);
-        //let yvel = mathFunction.Lerp(this.vel.y, 1000, delta * 0.01);
-        let yvel= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
+        let yvel = mathFunction.Lerp(this.vel.y, 1000, delta * 0.01);
+       // let yvel= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
         //   const groundCheck = new Ray(this.pos,new Vector(0,1))
 
         if (this.doJump && !this.isJumping && Math.abs(this.vel.y) < 0.01) {
