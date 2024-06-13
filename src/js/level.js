@@ -14,19 +14,19 @@ export class Level extends Scene {
     onInitialize(engine) {
         //TODO background Image is not centered if there is time over should be fixed
         // Voeg background nog toe.
-        const mast3 = new Actor;
+        const mast3 = new Actor();
         mast3.graphics.use(Resources.Mast3.toSprite());
         mast3.pos= new Vector(12,-18500)
         mast3.scale=new Vector(2,2)
         this.add(mast3);
 
-        const mast1 = new Actor;
+        const mast1 = new Actor();
         mast1.graphics.use(Resources.Mast1.toSprite());
         mast1.pos= new Vector(0,-3400)
         mast1.scale=new Vector(2,2)
         this.add(mast1);
 
-        const mast2 = new Actor;
+        const mast2 = new Actor();
         mast2.graphics.use(Resources.Mast2.toSprite());
         mast2.pos= new Vector(12,-11400)
         mast2.scale=new Vector(2,2)
