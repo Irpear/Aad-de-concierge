@@ -15,7 +15,7 @@ export class Level extends Scene {
         //TODO background Image is not centered if there is time over should be fixed
         // Voeg background nog toe.
         const background = new Actor;
-        background.graphics.use(Resources.Mast.toSprite());
+        background.graphics.use(Resources.Mast1.toSprite());
         background.pos= new Vector(0,-11450)
         background.scale=new Vector(2,2)
         this.add(background);
@@ -60,8 +60,8 @@ export class Level extends Scene {
 
         let cmanager = new wolkManager();
         this.add(cmanager);
-        let timer = new gameTimer();
-        this.add(timer);
+        //let timer = new gameTimer();
+       // this.add(timer);
     }
 
     onActivate(ctx) {

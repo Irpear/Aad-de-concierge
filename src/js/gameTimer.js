@@ -40,7 +40,6 @@ export class gameTimer extends ScreenElement {
       
         if(i<this.pI)
         {
-          console.log("sec");
           this.s++;
         }
         if(this.s==60)
@@ -53,7 +52,7 @@ export class gameTimer extends ScreenElement {
                 this.m = 0;
                 this.h++;
             }
-        this.pI = i;
+
 
         let hs = this.h.toString();
         let ms = this.m.toString();
@@ -70,7 +69,8 @@ export class gameTimer extends ScreenElement {
         {
             ss = "0"+this.s.toString();
         }
-        this.scoreText.text=hs+":"+ms+":"+ss;
-     
+        let mss = i.toString().slice(0,2);
+        this.scoreText.text=hs+":"+ms+":"+ss+"."+mss;
+        this.pI = i;
     }
 }
