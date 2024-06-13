@@ -48,7 +48,7 @@ export class platformManager extends Actor
     spawnNextPlatform()
     {
         let chosenAngle = mathFunction.Lerp(this.minAngle,this.maxAngle,Math.random())*0.01745329;
-        console.log(chosenAngle);
+      //  console.log(chosenAngle);
         let xc = Math.cos(chosenAngle)*this.distanceX;
         let yc = -Math.sin(chosenAngle)*this.distanceY;
         if(xc+this.pox>this.maxX || xc+this.pox<this.minX)

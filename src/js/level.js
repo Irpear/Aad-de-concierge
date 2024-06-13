@@ -7,6 +7,7 @@ import { platformManager } from "./platformManager";
 import { cameraFollow } from "./cameraFollow";
 import { wolkManager } from "./wolkManager";
 import { vector } from "excalibur/build/dist/Util/DrawUtil";
+import { gameTimer} from "./gameTimer";
 
 
 export class Level extends Scene {
@@ -59,6 +60,8 @@ export class Level extends Scene {
 
         let cmanager = new wolkManager();
         this.add(cmanager);
+        let timer = new gameTimer();
+        this.add(timer);
     }
 
     onActivate(ctx) {
