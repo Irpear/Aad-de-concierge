@@ -10,6 +10,8 @@ export class gameTimer extends ScreenElement {
     time = 0;
     game
     scoreText
+
+    timerStop = false;
     constructor() {
         super({x: 0, y: 0})
     }
@@ -34,53 +36,60 @@ export class gameTimer extends ScreenElement {
     {
         super.onPreUpdate(_engine, _delta);
         //console.log(_delta);
-        this.time+=_delta;
+        if(!this.timerStop)
+        {
+            this.time+=_delta;
     
-        let i = Math.floor(this.time%1001);
-      // console.log(i);
+            let i = Math.floor(this.time%1001);
+            // console.log(i);
       
-        if(i<this.pI)
-        {
-          this.s++;
-        }
-        if(this.s==60)
-        {
+            if(i<this.pI)
+            {
+            this.s++;
+            }
+            if(this.s==60)
+            {
           this.s = 0;
           this.m++;  
-        }
-        if(this.m==60)
+            }
+            if(this.m==60)
             {
                 this.m = 0;
                 this.h++;
             }
 
 
-        let hs = this.h.toString();
-        let ms = this.m.toString();
-        let ss = this.s.toString();
-        if(this.h<10)
-        {
+            let hs = this.h.toString();
+            let ms = this.m.toString();
+            let ss = this.s.toString();
+            if(this.h<10)
+            {
             hs = "0"+this.h.toString();
-        }
-        if(this.m<10)
-        {
+            }
+            if(this.m<10)
+            {
                 ms = "0"+this.m.toString();
-        }
-        if(this.s<10)
-        {
+            }
+            if(this.s<10)
+            {
             ss = "0"+this.s.toString();
-        }
-        let mss = "0"
-        if(i<100)
-        {
-           mss = "0"
-        }
-        else 
-        {
-            mss = i.toString().slice(0,1);
-        }
+            }
+            let mss = "0"
+            if(i<100)
+            {
+              mss = "0"
+            }
+            else 
+            {
+                mss = i.toString().slice(0,1);
+            }
 
-        this.scoreText.text=hs+":"+ms+":"+ss+"."+mss;
-        this.pI = i;
+            this.scoreText.text=hs+":"+ms+":"+ss+"."+mss;
+            this.pI = i;
+        }
+    }
+    endTime()
+    {
+        this.timerStop = true;
     }
 }

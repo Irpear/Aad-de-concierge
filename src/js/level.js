@@ -11,6 +11,7 @@ import { gameTimer} from "./gameTimer";
 
 
 export class Level extends Scene {
+    timer
     onInitialize(engine) {
         //TODO background Image is not centered if there is time over should be fixed
         // Voeg background nog toe.
@@ -62,7 +63,12 @@ export class Level extends Scene {
         platform.body.collisionType=CollisionType.Fixed;
         platform.CollisionGroup= 0b0100;
         this.add(platform);
-        let pmanager = new platformManager();
+        
+        
+        this.timer = new gameTimer();
+        this.add(this.timer);
+        
+        let pmanager = new platformManager(this.timer);
         this.add(pmanager);
         
         const camFollow = new cameraFollow();
@@ -74,8 +80,7 @@ export class Level extends Scene {
 
         let cmanager = new wolkManager();
         this.add(cmanager);
-        let timer = new gameTimer();
-        this.add(timer);
+     
     }
 
     onActivate(ctx) {

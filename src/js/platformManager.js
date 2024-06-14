@@ -2,7 +2,7 @@
 import { Color, CoordPlane, FontUnit, Label, Scene, Vector ,Actor,Shape, CollisionType, CollisionGroup} from "excalibur";
 import { Resources } from "./resources";
 import { mathFunction } from "./mathFunctions";
-
+import { endPoint } from "./endPoint";
 export class platformManager extends Actor
 {
     platforms = [];
@@ -15,10 +15,13 @@ export class platformManager extends Actor
 
     minX = -575
     maxX = 575
+    
+    timer
 
-    constructor()
+    constructor(timer)
     {
         super()
+        this.timer=timer;
     }
     onInitialize()
     {
@@ -42,6 +45,9 @@ export class platformManager extends Actor
         {
         this.spawnNextPlatform();
         }
+        let endPlatform = new endPoint(this.timer)
+        endPlatform.pos = new Vector(this.pox,this.poy-32);
+        this.scene.add(endPlatform);
         //this.spawnNextPlatform();
         //this.spawnNextPlatform();
     }

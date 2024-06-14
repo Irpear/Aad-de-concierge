@@ -1,5 +1,5 @@
 import '../css/style.css'
-import { Actor, Engine, Vector, DisplayMode } from "excalibur"
+import { Actor, Engine, Vector, DisplayMode, Debug } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
 import { Player } from './player.js'
 import { Level } from './level.js'
@@ -20,6 +20,7 @@ export class Game extends Engine {
         this.level = new Level()
         this.add('level', this.level)
         this.goToScene('level')
+       // this.toggleDebug()
     }
 }
 
