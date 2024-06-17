@@ -14,6 +14,7 @@ export class Player extends Actor {
     kbTime=0;
     kbVel;
     static playerPos;
+    static playerVel;
     constructor() {
         super({
             width: 100,
@@ -39,6 +40,7 @@ export class Player extends Actor {
         this.pInput(engine);
         this.pMove(delta);
         Player.playerPos = this.pos
+        Player.playerVel = this.vel;
         // Shooting or jumping Keys
     }
     // Detect player button press
