@@ -65,11 +65,7 @@ export class Player extends Actor {
       //let yvel= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
         //   const groundCheck = new Ray(this.pos,new Vector(0,1))
 
-        if (this.doJump && !this.isJumping && Math.abs(this.vel.y) < 0.01) {
-            // const groundCheck = new Ray(this.pos,new Vector(0,1))
-            //  console.log(this.scene.physics.rayCast(groundCheck,{ignoreCollisionGroupAll: true,maxDistance: 60,collisionMask:0b0100,filter:()=>{return true}}));
-            //  let rhit = this.scene.physics.rayCast(groundCheck,{ignoreCollisionGroupAll: true,maxDistance: 60,collisionMask:0b0100})
-            //  if(rhit.length>0){
+        if (this.doJump && !this.isJumping && Math.abs(this.vel.y)<850) {
 
             this.isJumping = true;
             this.jumpTime = 0;
