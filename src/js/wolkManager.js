@@ -24,6 +24,7 @@ export class wolkManager extends Actor
     {
         this.recycleCloud();
     }
+    //Spawn all cloud actors
     spawnCloud()
     {
         for(let i = 0;i<this.cloudAmount;i++)
@@ -39,6 +40,7 @@ export class wolkManager extends Actor
             this.cloudList.push(cloud);
         }
     }
+    //Moves cloud back to left side of screen, but wit different y
     recycleCloud()
     {
         for(let i =0;i<this.cloudAmount;i++)
