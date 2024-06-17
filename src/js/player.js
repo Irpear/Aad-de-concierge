@@ -11,7 +11,9 @@ export class Player extends Actor {
     jumpTime = 0;
     doJump = false;
     isJumping = false;
-
+    kbTime=0;
+    kbVel;
+    static playerPos;
     constructor() {
         super({
             width: 100,
@@ -36,6 +38,7 @@ export class Player extends Actor {
 
         this.pInput(engine);
         this.pMove(delta);
+        Player.playerPos = this.pos
         // Shooting or jumping Keys
     }
     // Detect player button press
@@ -80,14 +83,24 @@ export class Player extends Actor {
             }
 
         }
+        if(this.kbTime<=0)
+        {
         this.vel = new Vector(xvel, yvel);
+        }
+        else
+        {
+            this.vel = this.kbVel;
+            this.kbTime -= delta*0.01;
+            this.kbVel.y = mathFunction.Lerp(this.kbVel.y, 1000, delta * 0.01);
+        }
     }
 
-    gameOver(event) {
-        // Als je wordt geraakt door de puinhoop game over
-
-        // if (event.other instanceof Freeza) {
-        // }
+    knockBack() 
+    {
+        let yk = Math.max(Math.random(),0.5)*-2000
+        let xk = Math.sign(Math.random()*2-1)*mathFunction.Lerp(350,750,Math.random());
+        this.kbTime = 1.5;
+        this.kbVel = new Vector(xk,yk);
     }
 
 }

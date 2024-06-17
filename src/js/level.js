@@ -8,13 +8,14 @@ import { cameraFollow } from "./cameraFollow";
 import { wolkManager } from "./wolkManager";
 import { vector } from "excalibur/build/dist/Util/DrawUtil";
 import { gameTimer} from "./gameTimer";
+import { projectileSpawner } from "./projectileSpawner";
 
 
 export class Level extends Scene {
     timer
     onInitialize(engine) {
         //TODO background Image is not centered if there is time over should be fixed
-        // Voeg background nog toe.
+        //Background
         const mast3 = new Actor();
         mast3.graphics.use(Resources.Mast3.toSprite());
         mast3.pos= new Vector(12,-18500)
@@ -35,42 +36,29 @@ export class Level extends Scene {
 
      
 
-
+        //player object
         //Haha i won't change this
         this.goku = new Player()
         this.add(this.goku)
-
-
-
-        const smallEnemy = new Projectile()
-        smallEnemy.pos = new Vector(-575,300)
-        smallEnemy.scale = new Vector(-1,1);
-        this.add(smallEnemy)
-
-        const smallEnemy2 = new Projectile()
-        smallEnemy2.pos = new Vector(575,300)
-        this.add(smallEnemy2)
     
-
-        //it should later go to platform manager class
-
-        const platformGroup = new CollisionGroup('platform',0b0100,0b0100)
+        //The bottom platform
         const platform = new Actor()
         platform.pos = new Vector(0,600)
         platform.graphics.use(Resources.Platform.toSprite())
         platform.collider.set(Shape.Box(128,32))
         platform.scale=new Vector(15,3);
         platform.body.collisionType=CollisionType.Fixed;
-        platform.CollisionGroup= 0b0100;
         this.add(platform);
         
-        
+        //Game timer
         this.timer = new gameTimer();
         this.add(this.timer);
         
+        //Platform spawner
         let pmanager = new platformManager(this.timer);
         this.add(pmanager);
         
+        //Camera Behaviour
         const camFollow = new cameraFollow();
         camFollow.pos = new Vector(0,400);
         camFollow.player = this.goku;
@@ -78,9 +66,14 @@ export class Level extends Scene {
         this.camera.strategy.lockToActor(camFollow);
         this.camera.zoom = 0.5;
 
+        //Background Clouds
         let cmanager = new wolkManager();
         this.add(cmanager);
      
+
+        let projSpawner = new projectileSpawner();
+        this.add(projSpawner);
+    
     }
 
     onActivate(ctx) {
