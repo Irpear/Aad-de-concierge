@@ -3,7 +3,7 @@ import { NameInput } from "./nameInput";
 
 export class StartScreen extends Scene {
 
-    
+
     inputs = []
     static playerName
     selectedLetterSlot = 0;
@@ -75,7 +75,7 @@ export class StartScreen extends Scene {
         startButton.on('pointerup', () => {
             StartScreen.playerName = ''
             // De naam van de speler in de labels doorsturen naar de game
-            for(let i=0; i<this.inputs.length;i++){
+            for (let i = 0; i < this.inputs.length; i++) {
                 StartScreen.playerName += this.inputs[i].alphabet[this.inputs[i].selectedLetter]
             }
             this.engine.goToScene('level');
