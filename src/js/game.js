@@ -3,6 +3,7 @@ import { Actor, Engine, Vector, DisplayMode, Debug } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
 import { Player } from './player.js'
 import { Level } from './level.js'
+import { StartScreen } from './startScreen.js'
 
 export class Game extends Engine {
 
@@ -10,7 +11,8 @@ export class Game extends Engine {
         super({
             width: 1440,
             height: 900,
-            displayMode: DisplayMode.FitScreen
+            displayMode: DisplayMode.FitScreen,
+            suppressPlayButton: true,
         })
         this.start(ResourceLoader).then(() => this.startGame())
     }
@@ -18,9 +20,11 @@ export class Game extends Engine {
     startGame() {
         console.log("start de game!")
         this.level = new Level()
+        this.startScreen = new StartScreen()
+        this.add('startScreen', this.startScreen)
         this.add('level', this.level)
-        this.goToScene('level')
-       // this.toggleDebug()
+        this.goToScene('startScreen')
+        // this.toggleDebug()
     }
 }
 
