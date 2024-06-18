@@ -3,6 +3,7 @@ import { Actor, Engine, Vector, DisplayMode, Debug } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
 import { Player } from './player.js'
 import { Level } from './level.js'
+import { Endscene } from './endScene.js'
 
 export class Game extends Engine {
 
@@ -18,6 +19,8 @@ export class Game extends Engine {
     startGame() {
         console.log("start de game!")
         this.level = new Level()
+        this.endScene = new Endscene()
+        this.add('endscene',this.endScene)
         this.add('level', this.level)
         this.goToScene('level')
        // this.toggleDebug()
