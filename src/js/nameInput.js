@@ -19,6 +19,8 @@ export class NameInput extends Actor {
     letterLabel = null;
     thisTag;
 
+    
+
     onInitialize() {
         this.letterLabel = new Label({
             text: "A",
@@ -60,6 +62,6 @@ export class NameInput extends Actor {
             this.color = Color.Green
         } else if (this.scene.confirmName === false && !this.thisTag === this.scene.selectedLetterSlot) {
             this.color = Color.Gray
-        }
+        }   
     }
 }

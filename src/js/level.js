@@ -9,11 +9,13 @@ import { wolkManager } from "./wolkManager";
 import { vector } from "excalibur/build/dist/Util/DrawUtil";
 import { gameTimer} from "./gameTimer";
 import { projectileSpawner } from "./projectileSpawner";
+import { StartScreen } from "./startScreen";
 
 
 export class Level extends Scene {
     timer
     onInitialize(engine) {
+        
         //TODO background Image is not centered if there is time over should be fixed
         //Background
         const mast3 = new Actor();

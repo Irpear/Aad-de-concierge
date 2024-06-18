@@ -1,5 +1,6 @@
 import { CollisionGroup, Color, Font, Scene, ScreenElement, Text, Vector } from "excalibur";
 import { gameTimer } from "./gameTimer";
+import { StartScreen } from "./startScreen";
 export class Endscene extends Scene {
 
     endSceneText
@@ -7,14 +8,14 @@ export class Endscene extends Scene {
         console.log("Je bent bij de eindscene");
         const sElement = new ScreenElement()
         this.endSceneText = new Text({
-            text: gameTimer.endTime,
+            text: StartScreen.playerName + " "+ gameTimer.endTime,
             font: new Font({
                 size: 50,
                 family: 'Arial'
             }),
-            color:Color.White
+            color: Color.White
         })
-        
+
 
 
 

@@ -2,6 +2,10 @@ import { Actor, Color, Font, Keys, Label, Scene, Vector } from "excalibur";
 import { NameInput } from "./nameInput";
 
 export class StartScreen extends Scene {
+
+    
+    inputs = []
+    static playerName
     selectedLetterSlot = 0;
     onInitialize() {
         const title = new Label({
@@ -38,7 +42,8 @@ export class StartScreen extends Scene {
 
         //Create namefields
         for (let i = 0; i < 4; i++) {
-            const nameField = new NameInput(new Vector((this.engine.drawWidth / 2 - 180) + i * 120, 500), i)
+            let nameField = new NameInput(new Vector((this.engine.drawWidth / 2 - 180) + i * 120, 500), i)
+            this.inputs.push(nameField)
             this.add(nameField)
         }
 
@@ -68,6 +73,11 @@ export class StartScreen extends Scene {
 
         // Add an event listener for the start button
         startButton.on('pointerup', () => {
+            StartScreen.playerName = ''
+            // De naam van de speler in de labels doorsturen naar de game
+            for(let i=0; i<this.inputs.length;i++){
+                StartScreen.playerName += this.inputs[i].alphabet[this.inputs[i].selectedLetter]
+            }
             this.engine.goToScene('level');
         });
 
