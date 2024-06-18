@@ -32,7 +32,7 @@ export class Projectile extends Actor {
         if(event.other instanceof Player)
             {
                  console.log("collided With Player")
-                 event.other.knockBack();
+                 event.other.knockBack(this.pos);
             }
     }
 
