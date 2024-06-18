@@ -107,4 +107,13 @@ export class Player extends Actor {
         this.kbVel = new Vector(xk,yk);
     }
 
+    knockUp(projPos) {
+        //let yd = this.pos.y-projPos.y 
+        let yk = Math.max(Math.random(), 0.5) * -3000
+        let xk = Math.sign(this.pos.x - projPos.x) * mathFunction.Lerp(350, 750, Math.random());
+
+        this.kbTime = 1.5;
+        this.kbVel = new Vector(xk, yk);
+    }
+
 }
