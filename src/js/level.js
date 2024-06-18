@@ -34,8 +34,6 @@ export class Level extends Scene {
         mast2.scale=new Vector(2,2)
         this.add(mast2);
 
-     
-
         //player object
         //Haha i won't change this
         this.goku = new Player()
@@ -43,6 +41,7 @@ export class Level extends Scene {
     
         //The bottom platform
         const platform = new Actor()
+        platform.z=1000
         platform.pos = new Vector(0,600)
         platform.graphics.use(Resources.Platform.toSprite())
         platform.collider.set(Shape.Box(128,32))
