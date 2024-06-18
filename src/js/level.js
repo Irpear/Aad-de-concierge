@@ -10,6 +10,7 @@ import { vector } from "excalibur/build/dist/Util/DrawUtil";
 import { gameTimer} from "./gameTimer";
 import { projectileSpawner } from "./projectileSpawner";
 import { StartScreen } from "./startScreen";
+import { birdSpawner } from "./birdSpawner";
 
 
 export class Level extends Scene {
@@ -75,6 +76,8 @@ export class Level extends Scene {
         let projSpawner = new projectileSpawner();
         this.add(projSpawner);
     
+        let BirdSpawner = new birdSpawner();
+        this.add(BirdSpawner);
     }
 
     onActivate(ctx) {
