@@ -33,6 +33,7 @@ export class Bird extends Actor {
         if (event.other instanceof Player) {
             console.log("collided With Player")
             event.other.knockUp(this.pos);
+            Resources.KnockBack.play(0.5)
         }
     }
 
