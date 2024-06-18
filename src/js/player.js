@@ -11,7 +11,10 @@ export class Player extends Actor {
     jumpTime = 0;
     doJump = false;
     isJumping = false;
-
+    kbTime=0;
+    kbVel;
+    static playerPos;
+    static playerVel;
     constructor() {
         super({
             width: 100,
@@ -36,6 +39,8 @@ export class Player extends Actor {
 
         this.pInput(engine);
         this.pMove(delta);
+        Player.playerPos = this.pos
+        Player.playerVel = this.vel;
         // Shooting or jumping Keys
     }
     // Detect player button press
@@ -60,8 +65,8 @@ export class Player extends Actor {
     // Calculate and apply velocity
     pMove(delta) {
         let xvel = mathFunction.Lerp(this.vel.x, this.xspeed, delta * 0.005);
-        let yvel = mathFunction.Lerp(this.vel.y, 1000, delta * 0.01);
-      //let yvel= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
+        // let yvel = mathFunction.Lerp(this.vel.y, 1000, delta * 0.01);
+      let yvel= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
         if (this.doJump && !this.isJumping && Math.abs(this.vel.y)<850) {
 
             this.isJumping = true;
@@ -80,14 +85,26 @@ export class Player extends Actor {
             }
 
         }
+        if(this.kbTime<=0)
+        {
         this.vel = new Vector(xvel, yvel);
+        }
+        else
+        {
+            this.vel = this.kbVel;
+            this.kbTime -= delta*0.01;
+            this.kbVel.y = mathFunction.Lerp(this.kbVel.y, 1000, delta * 0.01);
+        }
     }
 
-    gameOver(event) {
-        // Als je wordt geraakt door de puinhoop game over
+    knockBack(projPos) 
+    {
+        //let yd = this.pos.y-projPos.y 
+        let yk = Math.max(Math.random(),0.5)*-3000
+        let xk = Math.sign(this.pos.x-projPos.x)*mathFunction.Lerp(350,750,Math.random());
 
-        // if (event.other instanceof Freeza) {
-        // }
+        this.kbTime = 1.5;
+        this.kbVel = new Vector(xk,yk);
     }
 
 }

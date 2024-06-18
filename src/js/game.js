@@ -4,6 +4,7 @@ import { Resources, ResourceLoader } from './resources.js'
 import { Player } from './player.js'
 import { Level } from './level.js'
 import { StartScreen } from './startScreen.js'
+import { Endscene } from './endScene.js'
 
 export class Game extends Engine {
 
@@ -22,6 +23,8 @@ export class Game extends Engine {
         this.level = new Level()
         this.startScreen = new StartScreen()
         this.add('startScreen', this.startScreen)
+        this.endScene = new Endscene()
+        this.add('endscene', this.endScene)
         this.add('level', this.level)
         this.goToScene('startScreen')
         // this.toggleDebug()
