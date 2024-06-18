@@ -22,7 +22,7 @@ export class birdSpawner extends Actor {
     SpawnBird() {
         let xp = this.Xoffset;
         let yp = (Math.random() * 1) * this.Yoffset + Player.playerPos.y;
-        let proj = new Bird(new Vector(xp, yp));
+        let proj = new Bird(new Vector(xp, yp),Math.sign(Math.random()*2-1));
         this.scene.add(proj);
         this.timeSinceLastSpawn = 0;
     }

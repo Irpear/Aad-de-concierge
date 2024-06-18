@@ -5,22 +5,25 @@ import { mathFunction } from "./mathFunctions";
 
 export class Bird extends Actor {
     canDespawn = false;
-    constructor(position) {
+    dir = 1;
+    constructor(position,dir) {
         super({ offset: new Vector(90, -20) })
+        this.dir = dir;
         this.pos = position;
+        this.pos.x *= dir;
     }
     onInitialize(engine) {
 
         console.log("Bird is created")
 
         let spr = Resources.Bird.toSprite();
-        this.scale = new Vector(1.0, 1.0);
+        this.scale = new Vector(this.dir*1.0, 1.0);
 
         this.graphics.use(spr);
 
         // this.pos = new Vector(500, 300)
 
-        this.vel = new Vector(-800, 0);
+        this.vel = new Vector(this.dir*-800, 0);
         let col = Shape.Box(250, 32);
         this.body.collisionType = CollisionType.Passive;
         this.collider.set(col);
