@@ -1,6 +1,7 @@
-import { Actor, Vector, Shape, CollisionType, Color } from "excalibur";
+import { Actor, Vector, Shape, CollisionType, Color, Random } from "excalibur";
 import { Resources } from "./resources";
 import { Player } from "./player";
+import { mathFunction } from "./mathFunctions";
 
 export class Projectile extends Actor {
     canDespawn = false;
@@ -18,6 +19,7 @@ export class Projectile extends Actor {
         let spr = Resources.Rock.toSprite();
         this.scale = new Vector(0.5, 0.5);
 
+        this.rotation = mathFunction.Lerp(-30,30,Math.random())*0.01745329;
         this.graphics.use(spr);
 
         // this.pos = new Vector(500, 300)
