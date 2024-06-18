@@ -6,7 +6,7 @@ export class birdSpawner extends Actor {
     spawnInterval = 10
     timeSinceLastSpawn = 0;
     Xoffset = 1800
-    Yoffset = -600
+    Yoffset = -1600
     minX = 0
     maxX = 0
 
