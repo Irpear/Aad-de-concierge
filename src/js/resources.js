@@ -7,6 +7,7 @@ import { Background } from './background'
 const Resources = {
     // Player Resources
     Fish: new ImageSource('images/fish.png'),
+    Rock: new ImageSource('images/brokstuk.png'),
     Platform: new ImageSource('images/ground.png'),
     Mast1: new ImageSource('images/Background1.png'),
     Mast2: new ImageSource('images/Background2.png'),
