@@ -89,8 +89,8 @@ export class Player extends Actor {
     pMove(delta) {
         let xvel = mathFunction.Lerp(this.vel.x, this.xspeed, delta * 0.005);
         let yvel = mathFunction.Lerp(this.vel.y, 1000, delta * 0.01);
-      //let yvel = mathFunction.Lerp(this.vel.y, this.yspeed, delta * 0.005);
-        if (this.doJump && !this.isJumping && Math.abs(this.vel.y) < 850) {
+      //let yvel= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
+        if (this.doJump && !this.isJumping && Math.abs(this.vel.y)<850) {
 
             this.isJumping = true;
             this.jumpTime = 0;
