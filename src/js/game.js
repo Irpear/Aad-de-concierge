@@ -27,7 +27,7 @@ export class Game extends Engine {
         this.add('endscene', this.endScene)
         this.add('level', this.level)
         this.goToScene('startScreen')
-        this.toggleDebug()
+      //this.toggleDebug()
     }
 }
 
