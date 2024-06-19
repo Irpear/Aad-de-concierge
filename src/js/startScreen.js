@@ -80,7 +80,7 @@ export class StartScreen extends Scene {
             const label = new Label({
                 text: difficulty.label,
                 font: new Font({
-                    size: 30,
+                    size: 30, 
                     color: Color.White,
                     family: 'Impact',
                 }),
