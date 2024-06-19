@@ -58,7 +58,14 @@ export class Player extends Actor {
         this.pMove(delta);
         Player.playerPos = this.pos
         Player.playerVel = this.vel;
-        // Shooting or jumping Keys
+
+        if (this.vel.y <= 0) {
+            this.graphics.use('jump');
+        } else if (this.vel.x < 0) {
+            this.graphics.use('run');
+        } else {
+            this.graphics.use('idle');
+        }
     }
     // Detect player button press
     pInput(engine) {
@@ -66,22 +73,16 @@ export class Player extends Actor {
         this.xspeed = 0;
         this.yspeed = 0;
         if (engine.input.keyboard.isHeld(Keys.Left) || engine.input.keyboard.isHeld(Keys.A)) {
-            this.graphics.use('run')
             this.xspeed = -500
         }
         if (engine.input.keyboard.isHeld(Keys.Right) || engine.input.keyboard.isHeld(Keys.D)) {
-            this.graphics.use('run')
             this.xspeed = 500
         }
         if (engine.input.keyboard.isHeld(Keys.Up) || engine.input.keyboard.isHeld(Keys.W)) {
-            this.graphics.use('jump')
             this.yspeed = -1500
         }
         if (engine.input.keyboard.isHeld(Keys.Down) || engine.input.keyboard.isHeld(Keys.S)) {
             this.yspeed = 1500
-        }
-        if (this.xspeed === 0 && this.yspeed === 0) {
-            this.graphics.use('idle')
         }
         // When the Spacebar is pressed jump 
         this.doJump = engine.input.keyboard.wasPressed(Keys.Space);
@@ -90,12 +91,11 @@ export class Player extends Actor {
     pMove(delta) {
         let xvel = mathFunction.Lerp(this.vel.x, this.xspeed, delta * 0.005);
         let yvel = mathFunction.Lerp(this.vel.y, 1000, delta * 0.01);
-      //let yvel= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
-        if (this.doJump && !this.isJumping && Math.abs(this.vel.y)<850) {
+        //let yvel= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
+        if (this.doJump && !this.isJumping && Math.abs(this.vel.y) < 850) {
 
             this.isJumping = true;
             this.jumpTime = 0;
-            this.graphics.use('jump');
         }
         if (this.isJumping) {
             let jt = Math.sqrt(mathFunction.quadraticFormula(-1, 0, 1, this.jumpTime / this.jumpDuration));
