@@ -26,7 +26,6 @@ export class Highscore extends ScreenElement {
         highScoreList.push(currentPlayer)
 
 
-        let cycle = 0
         let isSorted = false
         while (!isSorted) {
             isSorted = true
