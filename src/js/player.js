@@ -1,6 +1,7 @@
 import { Actor, CollisionType, Keys, Vector, Shape, Debug, Physics, Ray, Animation, range, SpriteSheet } from "excalibur"
 import { Resources } from "./resources"
 import { mathFunction } from "./mathFunctions"
+import { vector } from "excalibur/build/dist/Util/DrawUtil"
 
 export class Player extends Actor {
     game
@@ -42,7 +43,7 @@ export class Player extends Actor {
     onInitialize(engine) {
         this.game = engine;
         //  this.graphics.use(Resources.Fish.toSprite())
-        this.collider.set(Shape.Box(42, 42)) // Makes sure that the Player stand on the platform and doesnt pass through the platform
+        this.collider.set(Shape.Box(42, 64,new Vector(0.5,0.33))) // Makes sure that the Player stand on the platform and doesnt pass through the platform
         this.body.collisionType = CollisionType.Active;
         this.pos = new Vector(0, 300)
         this.scale = new Vector(2, 2)
@@ -68,6 +69,7 @@ export class Player extends Actor {
     }
     // Detect player button press
     pInput(engine) {
+        //console.log(this.vel)
         this.xspeed = 0;
         this.yspeed = 0;
         if (engine.input.keyboard.isHeld(Keys.Left) || engine.input.keyboard.isHeld(Keys.A)) {
@@ -116,6 +118,8 @@ export class Player extends Actor {
             this.kbTime -= delta * 0.01;
             this.kbVel.y = mathFunction.Lerp(this.kbVel.y, 1000, delta * 0.01);
         }
+        let flipDir = Math.sign(this.vel.x);
+        this.graphics.flipHorizontal=(flipDir>0)? true:false;
     }
 
     knockBack(projPos) {
