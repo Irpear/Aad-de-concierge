@@ -20,7 +20,6 @@ export class NameInput extends Actor {
     thisTag;
 
 
-
     onInitialize() {
         this.letterLabel = new Label({
             text: "A",

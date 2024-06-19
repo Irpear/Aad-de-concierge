@@ -11,6 +11,7 @@ export class gameTimer extends ScreenElement {
     game
     scoreText
 
+    static endTimeNum;
     static endTime;
     timerStop = false;
     constructor() {
@@ -86,6 +87,7 @@ export class gameTimer extends ScreenElement {
             }
             gameTimer.endTime = hs+":"+ms+":"+ss+"."+mss;
             this.scoreText.text= gameTimer.endTime;
+            gameTimer.endTimeNum = this.time;
             this.pI = i;
         }
     }

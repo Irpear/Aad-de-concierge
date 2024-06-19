@@ -9,7 +9,7 @@ const Resources = {
     Fish: new ImageSource('images/fish.png'),
     Rock: new ImageSource('images/brokstuk.png'),
     Platform: new ImageSource('images/ground.png'),
-    Bird: new ImageSource('images/vogel.png'),
+    Duck: new ImageSource('images/eend.png'),
     Mast1: new ImageSource('images/Background1.png'),
     Mast2: new ImageSource('images/Background2.png'),
     Mast3: new ImageSource('images/Background3.png'),

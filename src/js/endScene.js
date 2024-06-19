@@ -1,6 +1,7 @@
-import { CollisionGroup, Color, Font, Label, Scene, ScreenElement, Text, Vector } from "excalibur";
+import { Actor, Canvas, CollisionGroup, Color, Font, Graphic, Label, Raster, Rectangle, Scene, ScreenElement, Shape, Text, Vector } from "excalibur";
 import { gameTimer } from "./gameTimer";
 import { StartScreen } from "./startScreen";
+import { Highscore } from "./highscoredisplay";
 export class Endscene extends Scene {
 
     leaderboardText
@@ -8,7 +9,9 @@ export class Endscene extends Scene {
     onInitialize() {
         console.log("Je bent bij de eindscene");
         const sElement = new ScreenElement()
+        const playersInfo = localStorage.getItem('leaderboard');
 
+        let boardTest = new Highscore()
 
         this.leaderboardText = new Label({
             text: 'LEADERBOARD',
@@ -32,10 +35,9 @@ export class Endscene extends Scene {
             color: Color.White
         })
         this.playerInfo.anchor = new Vector(0.5, 0.5)
-
-
         this.add(this.leaderboardText)
         this.add(this.playerInfo)
+        this.add(boardTest)
 
     }
 
