@@ -78,7 +78,7 @@ export class StartScreen extends Scene {
             const label = new Label({
                 text: difficulty.label,
                 font: new Font({
-                    size: 30,
+                    size: 30, 
                     color: Color.White,
                     family: 'Impact',
                 }),
@@ -119,7 +119,7 @@ export class StartScreen extends Scene {
             for (let i = 0; i < this.inputs.length; i++) {
                 StartScreen.playerName += this.inputs[i].alphabet[this.inputs[i].selectedLetter];
             }
-            this.engine.goToScene('endscene');
+            this.engine.goToScene('level');
         });
 
         // Add actors
