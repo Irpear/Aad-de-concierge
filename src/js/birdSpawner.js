@@ -3,7 +3,7 @@ import { Bird } from "./bird";
 import { Player } from "./player";
 
 export class birdSpawner extends Actor {
-    spawnInterval = 10
+    static spawnInterval = 10
     timeSinceLastSpawn = 0;
     Xoffset = 1800
     Yoffset = -1600
