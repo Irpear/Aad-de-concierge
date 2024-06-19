@@ -39,9 +39,8 @@ export class Level extends Scene {
 
         //player object
         //Haha i won't change this
-        StartScreen.playerName = "GOKU"
-        this.player = new Player()
-        this.add(this.player)
+        let Goku = new Player()
+        this.add(Goku);
 
         //The bottom platform
         const platform = new Actor()
