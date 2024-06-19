@@ -23,8 +23,8 @@ export class Bird extends Actor {
 
         // this.pos = new Vector(500, 300)
 
-        this.vel = new Vector(this.dir*-800, 0);
-        let col = Shape.Circle(64)
+        this.vel = new Vector(this.dir*-mathFunction.Lerp(600,1000,Math.random()), 0);
+        let col = Shape.Circle(128)
         this.body.collisionType = CollisionType.Passive;
         this.collider.set(col);
         this.on("collisionstart", event => this.knockUp(event))

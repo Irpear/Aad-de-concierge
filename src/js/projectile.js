@@ -24,8 +24,8 @@ export class Projectile extends Actor {
 
         // this.pos = new Vector(500, 300)
 
-        this.vel = new Vector(0, 800);
-        let col = Shape.Circle(32);
+        this.vel = new Vector(0,mathFunction.Lerp(600,1000,Math.random()));
+        let col = Shape.Circle(64);
         this.body.collisionType = CollisionType.Passive;
         this.collider.set(col);
         this.on("collisionstart", event => this.knockBack(event))
