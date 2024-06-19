@@ -1,4 +1,4 @@
-import { Actor, Vector, Shape, CollisionType, Color, Random, SpriteSheet,range,Animation} from "excalibur";
+import { Actor, Vector, Shape, CollisionType, Color, Random, SpriteSheet, range, Animation } from "excalibur";
 import { Resources } from "./resources";
 import { Player } from "./player";
 import { mathFunction } from "./mathFunctions";
@@ -14,10 +14,10 @@ export class Bird extends Actor {
 
         const runSheet = SpriteSheet.fromImageSource({
             image: Resources.Duck,
-            grid: { rows: 2, columns: 5, spriteWidth: 120, spriteHeight: 117 }
+            grid: { rows: 2, columns: 5, spriteWidth: 114, spriteHeight: 117 }
         })
 
-        const fly = Animation.fromSpriteSheet(runSheet, range(0, 8), 100)
+        const fly = Animation.fromSpriteSheet(runSheet, range(0, 8), 80)
 
         this.graphics.add("fly", fly)
         this.graphics.use('fly')
