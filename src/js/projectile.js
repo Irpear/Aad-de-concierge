@@ -34,7 +34,7 @@ export class Projectile extends Actor {
         //this.on(
     }
     knockBack(event) {
-        if (event.other instanceof Player) {
+        if (event.other instanceof Player && !Player.isGoku) {
           //  console.log("collided With Player")
             event.other.knockBack(this.pos);
             Resources.KnockBack.play(0.5)

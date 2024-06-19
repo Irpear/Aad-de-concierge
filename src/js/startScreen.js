@@ -2,6 +2,7 @@ import { Actor, Color, Font, Keys, Label, Scene, Vector } from "excalibur";
 import { NameInput } from "./nameInput";
 import { projectileSpawner } from "./projectileSpawner";
 import { birdSpawner } from "./birdSpawner";
+import { Player } from "./player";
 
 export class StartScreen extends Scene {
     inputs = [];
@@ -144,7 +145,18 @@ export class StartScreen extends Scene {
                     birdSpawner.spawnInterval = 15;
                     break;
             }
-            this.engine.goToScene('level');
+            switch(StartScreen.playerName)
+            {
+                default:
+                    Player.isGoku=false;
+                    this.engine.goToScene('level');
+                    break;
+                case "GOKU":
+                    Player.isGoku=true;
+                    this.engine.goToScene('level');
+                    break;
+            }
+          
         });
 
         // Add actors

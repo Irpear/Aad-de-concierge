@@ -1,4 +1,4 @@
-import { Actor, CollisionType, Keys, Vector, Shape, Debug, Physics, Ray, Animation, range, SpriteSheet, Graphic } from "excalibur"
+import { Actor, CollisionType, Keys, Vector, Shape, Debug, Physics, Ray, Animation, range, SpriteSheet, Graphic, ConsoleAppender } from "excalibur"
 import { Resources } from "./resources"
 import { mathFunction } from "./mathFunctions"
 import { vector } from "excalibur/build/dist/Util/DrawUtil"
@@ -17,6 +17,7 @@ export class Player extends Actor {
     kbVel;
     static playerPos;
     static playerVel;
+    static isGoku=false;
     constructor() {
         super({
             width: 100,
@@ -27,7 +28,6 @@ export class Player extends Actor {
             image: Resources.Aad,
             grid: { rows: 2, columns: 4, spriteWidth: 177, spriteHeight: 192 }
         })
-
         const idle = Animation.fromSpriteSheet(runSheet, [0], 80)
         const run = Animation.fromSpriteSheet(runSheet, range(4, 7), 80)
         const jump = Animation.fromSpriteSheet(runSheet, [2], 80)
@@ -44,6 +44,13 @@ export class Player extends Actor {
     onInitialize(engine) {
         this.game = engine;
         //  this.graphics.use(Resources.Fish.toSprite())
+        if(Player.isGoku)
+            {
+                console.log("Its over 9000");
+                let gokuSprite = Resources.Goku.toSprite();
+                gokuSprite.scale = new Vector(0.1,0.1);
+                this.graphics.use(gokuSprite);
+            }
         this.collider.set(Shape.Box(84, 128, new Vector(0.5, 0.33))) // Makes sure that the Player stand on the platform and doesnt pass through the platform
         this.body.collisionType = CollisionType.Active;
         this.pos = new Vector(0, 300)
@@ -59,19 +66,18 @@ export class Player extends Actor {
         Player.playerPos = this.pos
         Player.playerVel = this.vel;
 
+        if(!Player.isGoku)
+        {
         this.graphics.use('idle')
-        if (this.vel.y <= 0 && StartScreen.playerName != "GOKU") {
+        if (this.vel.y <= 0) {
             this.graphics.use('jump');
-        } else if (Math.abs(this.vel.x) > 50 && StartScreen.playerName != "GOKU") {
+        } 
+        else if (Math.abs(this.vel.x) > 50) {
             this.graphics.use('run');
         }
-
-        if (this.kbTime > 0) if (StartScreen.playerName != "GOKU") {
+        if (this.kbTime > 0) {
             this.graphics.use('hit')
-        } else {
-            this.graphics.use(Resources.Goku.toSprite())
-            this.collider.set(Shape.Box(1000, 2000, new Vector(0.5, 0.33)))
-            this.scale = new Vector(0.1, 0.1)
+        }
         }
     }
     // Detect player button press
@@ -97,8 +103,14 @@ export class Player extends Actor {
     // Calculate and apply velocity
     pMove(delta) {
         let xvel = mathFunction.Lerp(this.vel.x, this.xspeed, delta * 0.005);
-        let yvel = mathFunction.Lerp(this.vel.y, 1000, delta * 0.01);
-        //let yvel= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
+        let yvel = 0;
+        if(Player.isGoku){
+            yvel= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
+        }
+        else
+        {
+             yvel = mathFunction.Lerp(this.vel.y, 1000, delta * 0.01);
+        }
         if (this.doJump && !this.isJumping && Math.abs(this.vel.y) < 850) {
 
             this.isJumping = true;
