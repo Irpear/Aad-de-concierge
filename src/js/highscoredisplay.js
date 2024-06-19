@@ -18,7 +18,7 @@ export class Highscore extends ScreenElement {
         if (!leaderStorage) {
             highScoreList = []
         }
-
+        console.log("ee1")
         let currentPlayer = { PlayerName: "", PlayerTime: "", TimeNumber: -1 };
         currentPlayer.PlayerName = StartScreen.playerName
         currentPlayer.PlayerTime = gameTimer.endTime
@@ -28,22 +28,23 @@ export class Highscore extends ScreenElement {
 
         let isSorted = false
         while (!isSorted) {
+            console.log("sorting");
             isSorted = true
             for (let i = 1; i < highScoreList.length; i++) {
                 let cur = highScoreList[i]
                 let prev = highScoreList[i - 1]
+                console.log(cur,prev);
                 if (cur.TimeNumber < prev.TimeNumber) {
+                    console.log("swap");
                     highScoreList[i] = prev
-                    highScoreList[i] = cur;
+                    highScoreList[i-1] = cur;
                     isSorted = false
                 }
             }
-            if(cycle>100){
-                isSorted = true
-            }
-            cycle++
+        
         }
-        // highScoreList = highScoreList.slice(0,5)
+        highScoreList = highScoreList.slice(0,5)
+        console.log("eee")
         localStorage.setItem("highscore", JSON.stringify(highScoreList))
 
 

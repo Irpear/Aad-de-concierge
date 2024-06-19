@@ -14,7 +14,7 @@ export class Projectile extends Actor {
     }
     onInitialize(engine) {
 
-        console.log("Projectile is created")
+       // console.log("Projectile is created")
 
         let spr = Resources.Rock.toSprite();
         this.scale = new Vector(0.5, 0.5);
@@ -35,7 +35,7 @@ export class Projectile extends Actor {
     }
     knockBack(event) {
         if (event.other instanceof Player) {
-            console.log("collided With Player")
+          //  console.log("collided With Player")
             event.other.knockBack(this.pos);
             Resources.KnockBack.play(0.5)
         }
@@ -46,7 +46,7 @@ export class Projectile extends Actor {
     }
     killProjectile() {
         if (this.canDespawn) {
-            console.log("killed")
+           // console.log("killed")
             this.kill();
         }
     }
