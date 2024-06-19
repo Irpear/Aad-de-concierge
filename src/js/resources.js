@@ -10,11 +10,12 @@ const Resources = {
     Rock: new ImageSource('images/brokstuk.png'),
     Platform: new ImageSource('images/ground.png'),
     Duck: new ImageSource('images/eend.png'),
+    Aad: new ImageSource('images/aad.png'),
     Mast1: new ImageSource('images/Background1.png'),
     Mast2: new ImageSource('images/Background2.png'),
     Mast3: new ImageSource('images/Background3.png'),
     Cloud: new ImageSource('images/cloudd.png'),
-    KnockBack:new Sound('images/knockback.mp3')
+    KnockBack: new Sound('images/knockback.mp3')
     //Enemy Resources
 
     //Background Resources
