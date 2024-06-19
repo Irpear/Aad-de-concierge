@@ -1,4 +1,4 @@
-import { Actor, CollisionType, Keys, Vector, Shape, Debug, Physics, Ray } from "excalibur"
+import { Actor, CollisionType, Keys, Vector, Shape, Debug, Physics, Ray, Animation, range, SpriteSheet } from "excalibur"
 import { Resources } from "./resources"
 import { mathFunction } from "./mathFunctions"
 
@@ -11,7 +11,7 @@ export class Player extends Actor {
     jumpTime = 0;
     doJump = false;
     isJumping = false;
-    kbTime=0;
+    kbTime = 0;
     kbVel;
     static playerPos;
     static playerVel;
@@ -21,15 +21,31 @@ export class Player extends Actor {
             height: 100,
             radius: 50
         })
+        const runSheet = SpriteSheet.fromImageSource({
+            image: Resources.Aad,
+            grid: { rows: 2, columns: 4, spriteWidth: 89, spriteHeight: 96 }
+        })
+
+        const idle = Animation.fromSpriteSheet(runSheet, [0], 80)
+        const run = Animation.fromSpriteSheet(runSheet, range(4, 7), 80)
+        const jump = Animation.fromSpriteSheet(runSheet, [2], 80)
+        const hit = Animation.fromSpriteSheet(runSheet, [1], 80)
+
+        this.graphics.add("idle", idle)
+        this.graphics.add("run", run)
+        this.graphics.add("jump", jump)
+        this.graphics.add("hit", hit)
+
     }
 
 
     onInitialize(engine) {
         this.game = engine;
-        this.graphics.use(Resources.Fish.toSprite())
-        this.collider.set(Shape.Box(64, 64)) // Makes sure that the Player stand on the platform and doesnt pass through the platform
+        //  this.graphics.use(Resources.Fish.toSprite())
+        this.collider.set(Shape.Box(42, 42)) // Makes sure that the Player stand on the platform and doesnt pass through the platform
         this.body.collisionType = CollisionType.Active;
-        this.pos = new Vector(0,300)
+        this.pos = new Vector(0, 300)
+        this.scale = new Vector(2, 2)
     }
 
 
@@ -45,32 +61,40 @@ export class Player extends Actor {
     }
     // Detect player button press
     pInput(engine) {
+        console.log(this.vel)
         this.xspeed = 0;
         this.yspeed = 0;
         if (engine.input.keyboard.isHeld(Keys.Left) || engine.input.keyboard.isHeld(Keys.A)) {
+            this.graphics.use('run')
             this.xspeed = -500
         }
         if (engine.input.keyboard.isHeld(Keys.Right) || engine.input.keyboard.isHeld(Keys.D)) {
+            this.graphics.use('run')
             this.xspeed = 500
         }
         if (engine.input.keyboard.isHeld(Keys.Up) || engine.input.keyboard.isHeld(Keys.W)) {
+            this.graphics.use('jump')
             this.yspeed = -1500
         }
         if (engine.input.keyboard.isHeld(Keys.Down) || engine.input.keyboard.isHeld(Keys.S)) {
             this.yspeed = 1500
         }
-        this.doJump = engine.input.keyboard.wasPressed(Keys.Space);
+        if (this.xspeed === 0 && this.yspeed === 0) {
+            this.graphics.use('idle')
+        }
         // When the Spacebar is pressed jump 
+        this.doJump = engine.input.keyboard.wasPressed(Keys.Space);
     }
     // Calculate and apply velocity
     pMove(delta) {
         let xvel = mathFunction.Lerp(this.vel.x, this.xspeed, delta * 0.005);
-        // let yvel = mathFunction.Lerp(this.vel.y, 1000, delta * 0.01);
-      let yvel= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
+        let yvel = mathFunction.Lerp(this.vel.y, 1000, delta * 0.01);
+      //let yvel= mathFunction.Lerp(this.vel.y,this.yspeed,delta*0.005);
         if (this.doJump && !this.isJumping && Math.abs(this.vel.y)<850) {
 
             this.isJumping = true;
             this.jumpTime = 0;
+            this.graphics.use('jump');
         }
         if (this.isJumping) {
             let jt = Math.sqrt(mathFunction.quadraticFormula(-1, 0, 1, this.jumpTime / this.jumpDuration));
@@ -85,26 +109,25 @@ export class Player extends Actor {
             }
 
         }
-        if(this.kbTime<=0)
-        {
-        this.vel = new Vector(xvel, yvel);
+        if (this.kbTime <= 0) {
+            this.vel = new Vector(xvel, yvel);
         }
-        else
-        {
+        else {
             this.vel = this.kbVel;
-            this.kbTime -= delta*0.01;
+            this.kbTime -= delta * 0.01;
             this.kbVel.y = mathFunction.Lerp(this.kbVel.y, 1000, delta * 0.01);
         }
+
     }
 
-    knockBack(projPos) 
-    {
+    knockBack(projPos) {
         //let yd = this.pos.y-projPos.y 
-        let yk = Math.max(Math.random(),0.5)*-3000
-        let xk = Math.sign(this.pos.x-projPos.x)*mathFunction.Lerp(350,750,Math.random());
+        let yk = Math.max(Math.random(), 0.5) * -3000
+        let xk = Math.sign(this.pos.x - projPos.x) * mathFunction.Lerp(350, 750, Math.random());
 
+        this.graphics.use('hit')
         this.kbTime = 1.5;
-        this.kbVel = new Vector(xk,yk);
+        this.kbVel = new Vector(xk, yk);
     }
 
     knockUp(projPos) {
@@ -112,8 +135,10 @@ export class Player extends Actor {
         let yk = Math.max(Math.random(), 0.5) * -6000
         let xk = Math.sign(this.pos.x - projPos.x) * mathFunction.Lerp(100, 300, Math.random());
 
+        this.graphics.use('hit')
         this.kbTime = 1.5;
         this.kbVel = new Vector(xk, yk);
     }
 
 }
+

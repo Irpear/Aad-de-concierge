@@ -1,5 +1,7 @@
 import { Actor, Color, Font, Keys, Label, Scene, Vector } from "excalibur";
 import { NameInput } from "./nameInput";
+import { projectileSpawner } from "./projectileSpawner";
+import { birdSpawner } from "./birdSpawner";
 
 export class StartScreen extends Scene {
     inputs = [];
@@ -118,6 +120,29 @@ export class StartScreen extends Scene {
             // Collect the player's name from the inputs
             for (let i = 0; i < this.inputs.length; i++) {
                 StartScreen.playerName += this.inputs[i].alphabet[this.inputs[i].selectedLetter];
+            }
+            switch (StartScreen.selectedDifficulty) {
+                case 0:
+                    projectileSpawner.spawnInterval = 10;
+                    birdSpawner.spawnInterval = 20;
+
+                    break;
+                case 1:
+
+                    projectileSpawner.spawnInterval = 7.5;
+                    birdSpawner.spawnInterval = 15;
+
+                    break;
+                case 2:
+
+                    projectileSpawner.spawnInterval = 5;
+                    birdSpawner.spawnInterval = 10;
+
+                    break;
+                default:
+                    projectileSpawner.spawnInterval = 7.5;
+                    birdSpawner.spawnInterval = 15;
+                    break;
             }
             this.engine.goToScene('level');
         });
