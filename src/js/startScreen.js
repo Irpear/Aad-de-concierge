@@ -119,7 +119,7 @@ export class StartScreen extends Scene {
             for (let i = 0; i < this.inputs.length; i++) {
                 StartScreen.playerName += this.inputs[i].alphabet[this.inputs[i].selectedLetter];
             }
-            this.engine.goToScene('level');
+            this.engine.goToScene('endscene');
         });
 
         // Add actors

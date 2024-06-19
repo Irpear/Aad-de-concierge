@@ -12,7 +12,7 @@ export class Endscene extends Scene {
         const playersInfo = localStorage.getItem('leaderboard');
 
         let boardTest = new Highscore()
-
+        this.add(boardTest)
         this.leaderboardText = new Label({
             text: 'LEADERBOARD',
             pos: new Vector(this.engine.drawWidth / 2, this.engine.drawHeight / 4),
@@ -24,20 +24,11 @@ export class Endscene extends Scene {
         });
         this.leaderboardText.anchor = new Vector(0.5, 0.5)
 
-        
-        this.playerInfo = new Label({
-            text: StartScreen.playerName + " " + gameTimer.endTime,
-            pos: new Vector(this.engine.drawWidth / 2, this.engine.drawHeight / 2 - 100),
-            font: new Font({
-                size: 50,
-                family: 'impact'
-            }),
-            color: Color.White
-        })
-        this.playerInfo.anchor = new Vector(0.5, 0.5)
+
+
+     
         this.add(this.leaderboardText)
-        this.add(this.playerInfo)
-        this.add(boardTest)
+
 
     }
 
