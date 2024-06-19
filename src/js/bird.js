@@ -1,4 +1,4 @@
-import { Actor, Vector, Shape, CollisionType, Color, Random } from "excalibur";
+import { Actor, Vector, Shape, CollisionType, Color, Random, SpriteSheet,range} from "excalibur";
 import { Resources } from "./resources";
 import { Player } from "./player";
 import { mathFunction } from "./mathFunctions";
