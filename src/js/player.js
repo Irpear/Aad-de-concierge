@@ -25,7 +25,7 @@ export class Player extends Actor {
         })
         const runSheet = SpriteSheet.fromImageSource({
             image: Resources.Aad,
-            grid: { rows: 2, columns: 4, spriteWidth: 89, spriteHeight: 96 }
+            grid: { rows: 2, columns: 4, spriteWidth: 177, spriteHeight: 192 }
         })
 
         const idle = Animation.fromSpriteSheet(runSheet, [0], 80)
@@ -44,10 +44,9 @@ export class Player extends Actor {
     onInitialize(engine) {
         this.game = engine;
         //  this.graphics.use(Resources.Fish.toSprite())
-        this.collider.set(Shape.Box(42, 64, new Vector(0.5, 0.33))) // Makes sure that the Player stand on the platform and doesnt pass through the platform
+        this.collider.set(Shape.Box(84, 128, new Vector(0.5, 0.33))) // Makes sure that the Player stand on the platform and doesnt pass through the platform
         this.body.collisionType = CollisionType.Active;
         this.pos = new Vector(0, 300)
-        this.scale = new Vector(2, 2)
     }
 
 
@@ -60,12 +59,15 @@ export class Player extends Actor {
         Player.playerPos = this.pos
         Player.playerVel = this.vel;
 
+        this.graphics.use('idle')
         if (this.vel.y <= 0 && StartScreen.playerName != "GOKU") {
             this.graphics.use('jump');
-        } else if (this.vel.x < 0 && StartScreen.playerName != "GOKU") {
+        } else if (Math.abs(this.vel.x) > 50 && StartScreen.playerName != "GOKU") {
             this.graphics.use('run');
-        } else if (StartScreen.playerName != "GOKU") {
-            this.graphics.use('idle');
+        }
+
+        if (this.kbTime > 0) if (StartScreen.playerName != "GOKU") {
+            this.graphics.use('hit')
         } else {
             this.graphics.use(Resources.Goku.toSprite())
             this.collider.set(Shape.Box(1000, 2000, new Vector(0.5, 0.33)))
@@ -132,7 +134,6 @@ export class Player extends Actor {
         let yk = Math.max(Math.random(), 0.5) * -3000
         let xk = Math.sign(this.pos.x - projPos.x) * mathFunction.Lerp(350, 750, Math.random());
 
-        this.graphics.use('hit')
         this.kbTime = 1.5;
         this.kbVel = new Vector(xk, yk);
     }
@@ -142,7 +143,6 @@ export class Player extends Actor {
         let yk = Math.max(Math.random(), 0.5) * -6000
         let xk = Math.sign(this.pos.x - projPos.x) * mathFunction.Lerp(100, 300, Math.random());
 
-        this.graphics.use('hit')
         this.kbTime = 1.5;
         this.kbVel = new Vector(xk, yk);
     }
