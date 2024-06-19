@@ -3,7 +3,6 @@ import { NameInput } from "./nameInput";
 
 export class StartScreen extends Scene {
 
-
     inputs = []
     static playerName
     selectedLetterSlot = 0;
@@ -39,6 +38,7 @@ export class StartScreen extends Scene {
             })
         });
         subtitle2.anchor = new Vector(0.5, 0.5)
+
 
         //Create namefields
         for (let i = 0; i < 4; i++) {
