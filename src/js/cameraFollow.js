@@ -4,6 +4,7 @@ export class cameraFollow extends Actor {
     constructor() {
         super()
     }
+    static camPos;
     onInitialize() {
         super.onInitialize();
 
@@ -16,5 +17,6 @@ export class cameraFollow extends Actor {
         } else {
             this.pos = new Vector(this.pos.x, -280)
         }
+        cameraFollow.camPos=this.pos;
     }
 }

@@ -1,6 +1,7 @@
 import { Actor, Vector } from "excalibur";
 import { Projectile } from "./projectile";
 import { Player } from "./player";
+import { cameraFollow } from "./cameraFollow";
 export class projectileSpawner extends Actor
 {
     static spawnInterval=5
@@ -25,7 +26,7 @@ export class projectileSpawner extends Actor
     SpawnProjectile()
     {
         let xp = (Math.random()*2-1)*this.Xoffset+Player.playerPos.x;
-        let yp = this.Yoffset + Player.playerPos.y;
+        let yp = this.Yoffset + cameraFollow.camPos.y;
         let proj = new Projectile(new Vector(xp,yp));
         this.scene.add(proj);
         this.timeSinceLastSpawn = 0;
