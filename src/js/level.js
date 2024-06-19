@@ -63,7 +63,7 @@ export class Level extends Scene {
         //Camera Behaviour
         const camFollow = new cameraFollow();
         camFollow.pos = new Vector(0, 400);
-        camFollow.player = this.player;
+        camFollow.player = Goku;
         this.add(camFollow);
         this.camera.strategy.lockToActor(camFollow);
         this.camera.zoom = 0.5;
