@@ -47,8 +47,8 @@ export class Level extends Scene {
         platform.z = 1000
         platform.pos = new Vector(0, 600)
         platform.graphics.use(Resources.Platform.toSprite())
-        platform.collider.set(Shape.Box(128, 32))
-        platform.scale = new Vector(15, 3);
+        platform.collider.set(Shape.Box(363, 91))
+        platform.scale = new Vector(15, 1);
         platform.body.collisionType = CollisionType.Fixed;
         this.add(platform);
 
