@@ -35,7 +35,7 @@ export class platformManager extends Actor
         platform.graphics.use(Resources.Platform.toSprite())
         platform.pos = pos//new Vector(500,200);
         platform.collider.set(Shape.Box(363,91))
-        platform.scale=new Vector(1,1/2);
+        platform.scale=new Vector(1/1.5,0.5);
         platform.body.collisionType=CollisionType.Fixed;
         this.scene.add(platform);
         this.platforms.push(platform);
@@ -68,7 +68,7 @@ export class platformManager extends Actor
         platform.graphics.use(Resources.Platform.toSprite())
         platform.pos = pos//new Vector(500,200);
         platform.collider.set(Shape.Box(363,91))
-        platform.scale=new Vector(1,1/2);
+        platform.scale=new Vector(1/1.5,0.5);
         platform.body.collisionType=CollisionType.Fixed;
         this.scene.add(platform);
         this.platforms.push(platform);
