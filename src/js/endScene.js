@@ -6,6 +6,8 @@ export class Endscene extends Scene {
 
     leaderboardText
     playerInfo
+    static difficultyString;
+    static modeString;
     onInitialize() {
         console.log("Je bent bij de eindscene");
         const sElement = new ScreenElement()
@@ -15,7 +17,7 @@ export class Endscene extends Scene {
         this.add(boardTest)
         this.leaderboardText = new Label({
             text: 'LEADERBOARD',
-            pos: new Vector(this.engine.drawWidth / 2, this.engine.drawHeight / 4),
+            pos: new Vector(this.engine.drawWidth / 2, this.engine.drawHeight / 6),
             font: new Font({
                 family: 'impact',
                 size: 120,
@@ -23,12 +25,19 @@ export class Endscene extends Scene {
             color: Color.Yellow
         });
         this.leaderboardText.anchor = new Vector(0.5, 0.5)
-
-
-
-     
         this.add(this.leaderboardText)
-
+        
+        let ModeDifficulty = new Label({
+            text: Endscene.modeString+" "+Endscene.difficultyString,
+            pos: new Vector(this.engine.drawWidth / 2, this.engine.drawHeight / 6+120),
+            font: new Font({
+                family: 'impact',
+                size: 90,
+            }),
+            color: Color.Yellow
+        });
+        ModeDifficulty.anchor=new Vector(0.5,0.5)
+        this.add(ModeDifficulty);
 
     }
 

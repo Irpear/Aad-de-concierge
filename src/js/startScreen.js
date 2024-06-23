@@ -3,6 +3,7 @@ import { NameInput } from "./nameInput";
 import { projectileSpawner } from "./projectileSpawner";
 import { birdSpawner } from "./birdSpawner";
 import { Player } from "./player";
+import { Endscene } from "./endScene";
 
 export class StartScreen extends Scene {
     inputs = [];
@@ -124,23 +125,25 @@ export class StartScreen extends Scene {
             }
             switch (StartScreen.selectedDifficulty) {
                 case 0:
+                    Endscene.difficultyString="Easy"
                     projectileSpawner.spawnInterval = 10;
                     birdSpawner.spawnInterval = 20;
 
                     break;
                 case 1:
-
+                    Endscene.difficultyString="Normal"
                     projectileSpawner.spawnInterval = 7.5;
                     birdSpawner.spawnInterval = 15;
 
                     break;
                 case 2:
-
+                    Endscene.difficultyString="Hard"
                     projectileSpawner.spawnInterval = 5;
                     birdSpawner.spawnInterval = 10;
 
                     break;
                 default:
+                    Endscene.difficultyString="Normal"
                     projectileSpawner.spawnInterval = 7.5;
                     birdSpawner.spawnInterval = 15;
                     break;
@@ -149,9 +152,11 @@ export class StartScreen extends Scene {
             {
                 default:
                     Player.isGoku=false;
+                    Endscene.modeString ="";
                     this.engine.goToScene('level');
                     break;
                 case "GOKU":
+                    Endscene.modeString ="Goku-mode";
                     Player.isGoku=true;
                     this.engine.goToScene('level');
                     break;

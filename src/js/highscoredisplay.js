@@ -1,6 +1,7 @@
 import { ScreenElement, GraphicsGroup, Vector, Label, Font, Color } from "excalibur";
 import { gameTimer } from "./gameTimer"
 import { StartScreen } from "./startScreen";
+import { Endscene } from "./endScene";
 
 export class Highscore extends ScreenElement {
     constructor() {
@@ -13,30 +14,38 @@ export class Highscore extends ScreenElement {
         console.log('HighScore Class is loaded');
 
         // haal de highscores op uit de localstorage
-        let leaderStorage = localStorage.getItem("highscore");
+        let leaderStorage = localStorage.getItem("highscore"+Endscene.difficultyString+Endscene.modeString);
         let highScoreList = JSON.parse(leaderStorage)
         // 
         if (!leaderStorage) {
             highScoreList = []
         }
-        console.log("ee1")
+      //  console.log("ee1")
         let currentPlayer = { PlayerName: "", PlayerTime: "", TimeNumber: -1 };
         currentPlayer.PlayerName = StartScreen.playerName
         currentPlayer.PlayerTime = gameTimer.endTime
         currentPlayer.TimeNumber = gameTimer.endTimeNum
         highScoreList.push(currentPlayer)
 
-
+        let curIndex = highScoreList.length-1;
         let isSorted = false
         while (!isSorted) {
-            console.log("sorting");
+            //console.log("sorting");
             isSorted = true
             for (let i = 1; i < highScoreList.length; i++) {
                 let cur = highScoreList[i]
                 let prev = highScoreList[i - 1]
-                console.log(cur, prev);
+               // console.log(cur, prev);
                 if (cur.TimeNumber < prev.TimeNumber) {
-                    console.log("swap");
+                 //   console.log("swap");
+                    if(curIndex==i)
+                        {
+                            curIndex=i-1;
+                        }
+                    else if(curIndex==i-1)
+                        {
+                            curIndex=i
+                        }
                     highScoreList[i] = prev
                     highScoreList[i - 1] = cur;
                     isSorted = false
@@ -45,9 +54,13 @@ export class Highscore extends ScreenElement {
 
         }
         highScoreList = highScoreList.slice(0, 5)
-        console.log("eee")
-        localStorage.setItem("highscore", JSON.stringify(highScoreList))
+       // console.log("eee")
+        localStorage.setItem("highscore"+Endscene.difficultyString+Endscene.modeString, JSON.stringify(highScoreList))
         Highscore.playerScores = highScoreList
+        if(curIndex==4 && highScoreList.length==5)
+            {
+                highScoreList.push(currentPlayer);
+            }
 
         for (let i = 0; i < highScoreList.length; i++) {
 
@@ -58,18 +71,11 @@ export class Highscore extends ScreenElement {
                     size: 50,
                     family: 'impact'
                 }),
-                color: Color.White
+                color: (i==curIndex)?Color.Yellow:Color.White
             })
             playerInfo.anchor = new Vector(0.5, 0.5)
             this.scene?.add(playerInfo)
             
         }
-
-
-        let hDisplayGraphics = new GraphicsGroup({
-            members: [
-
-            ]
-        })
     }
 }
