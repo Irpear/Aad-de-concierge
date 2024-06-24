@@ -1,4 +1,4 @@
-import { Color, CoordPlane, FontUnit, Label, Scene, Vector, Actor, Shape, CollisionType, CollisionGroup, Resource } from "excalibur";
+import { Color, CoordPlane, FontUnit, Label, Scene, Vector, Actor, Shape, CollisionType, CollisionGroup, Resource,SpriteSheet,range,Animation } from "excalibur";
 import { Background } from "./background";
 import { Player } from "./player";
 import { Projectile } from "./projectile";
@@ -44,30 +44,41 @@ export class Level extends Scene {
         this.add(mast2);
 
 
+        const fireSheet = SpriteSheet.fromImageSource({
+            image: Resources.FireAnim,
+            grid: { rows: 1, columns: 3, spriteWidth: 239, spriteHeight: 316 }
+        })
+        let fireAnim = Animation.fromSpriteSheet(fireSheet,range(0,2), 80)
+        let fire = new Actor();
+        fire.graphics.add("fire",fireAnim);
+        fire.graphics.use("fire")
+        fire.pos = new Vector(35,-22478); 
+        fire.scale = new Vector(2,2);
+        this.add(fire);
+
         //Sky
         const sky3 = new Actor();
-        sky3.graphics.use(Resources.Sky3.toSprite());
+        sky3.graphics.use(Resources.Sky1.toSprite());
         sky3.pos = new Vector(12, -18500)
-        sky3.scale = new Vector(3, -2)
+        sky3.scale = new Vector(3, 2)
         sky3.z = -500;
         this.add(sky3);
 
         const sky1 = new Actor();
-        sky1.graphics.use(Resources.Sky1.toSprite());
+        sky1.graphics.use(Resources.Sky3.toSprite());
         sky1.pos = new Vector(0, -3400)
-        sky1.scale = new Vector(3, -2)
+        sky1.scale = new Vector(3, 2)
         sky1.z = -500;
         this.add(sky1);
 
         const sky2 = new Actor();
         sky2.graphics.use(Resources.Sky2.toSprite());
         sky2.pos = new Vector(12, -11400)
-        sky2.scale = new Vector(3, -2)
+        sky2.scale = new Vector(3, 2)
         sky2.z = -500;
         this.add(sky2);
 
-
-
+     
 
         //player object
         //Haha i won't change this

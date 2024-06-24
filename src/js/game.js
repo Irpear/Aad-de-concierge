@@ -1,5 +1,5 @@
 import '../css/style.css'
-import { Actor, Engine, Vector, DisplayMode, Debug } from "excalibur"
+import { Actor, Engine, Vector, DisplayMode, Debug, Color } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
 import { Player } from './player.js'
 import { Level } from './level.js'
@@ -36,6 +36,7 @@ export class Game extends Engine {
         this.add('endscene', this.endScene)
         this.add('level', this.level)
         this.goToScene('startScreen')
+        this.backgroundColor = Color.fromRGB(52, 103, 255);
         //this.toggleDebug()
 
     }
