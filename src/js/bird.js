@@ -24,7 +24,7 @@ export class Bird extends Actor {
     }
     onInitialize(engine) {
 
-        console.log("Bird is created")
+        //console.log("Bird is created")
 
         //let spr = Resources.Bird.toSprite();
         this.scale = new Vector(-this.dir * 2, 2);
@@ -43,8 +43,8 @@ export class Bird extends Actor {
 
     }
     knockUp(event) {
-        if (event.other instanceof Player) {
-            console.log("collided With Player")
+        if (event.other instanceof Player && !Player.isGoku) {
+           // console.log("collided With Player")
             event.other.knockUp(this.pos);
             Resources.KnockBack.play(0.5)
         }
@@ -55,7 +55,7 @@ export class Bird extends Actor {
     }
     killProjectile() {
         if (this.canDespawn) {
-            console.log("killed")
+          //  console.log("killed")
             this.kill();
         }
     }

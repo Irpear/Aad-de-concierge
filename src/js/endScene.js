@@ -5,6 +5,7 @@ import { Highscore } from "./highscoredisplay";
 import { Restart } from "./restart";
 import { Game } from "./game";
 import { Resources } from "./resources";
+import { Level } from "./level";
 export class Endscene extends Scene {
 
     leaderboardText
@@ -17,6 +18,7 @@ export class Endscene extends Scene {
     }
     onActivate(ctx) {
         console.log("Je bent bij de eindscene");
+        Level.music.stop();
         const sElement = new ScreenElement()
         const playersInfo = localStorage.getItem('leaderboard');
 
@@ -77,6 +79,6 @@ export class Endscene extends Scene {
     }
     onDeactivate() {
         console.log("Stop Music")
-        Resources.Background.stop()
+        Resources.BackgroundMusic.stop()
     }
 }

@@ -1,4 +1,4 @@
-import { Color, CoordPlane, FontUnit, Label, Scene, Vector, Actor, Shape, CollisionType, CollisionGroup, Resource,SpriteSheet,range,Animation } from "excalibur";
+import { Color, CoordPlane, FontUnit, Label, Scene, Vector, Actor, Shape, CollisionType, CollisionGroup, Resource,SpriteSheet,range,Animation, Sound } from "excalibur";
 import { Background } from "./background";
 import { Player } from "./player";
 import { Projectile } from "./projectile";
@@ -16,6 +16,7 @@ import { birdSpawner } from "./birdSpawner";
 export class Level extends Scene {
     timer
     static scene;
+    static music=null;
     onInitialize(engine) {
 
 
@@ -121,7 +122,17 @@ export class Level extends Scene {
 
         let BirdSpawner = new birdSpawner();
         this.add(BirdSpawner);
-        Resources.Background.play(0.5)
+        if(StartScreen.selectedDifficulty==2)
+            {
+                Level.music = Resources.BackgroundMusicHard;
+            }
+            else
+        {
+            Level.music = Resources.BackgroundMusic;
+        }
+        console.log(Level.music);
+        Level.music.loop=true;
+        Level.music.play(0.5);
     }
 
 
