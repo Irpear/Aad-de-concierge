@@ -1,4 +1,4 @@
-import { Actor, CollisionType, Keys, Vector, Shape, Debug, Physics, Ray, Animation, range, SpriteSheet, Graphic, ConsoleAppender } from "excalibur"
+import { Actor, CollisionType, Keys, Vector, Shape, Debug, Physics, Ray, Animation, range, SpriteSheet, Graphic, ConsoleAppender, clamp } from "excalibur"
 import { Resources } from "./resources"
 import { mathFunction } from "./mathFunctions"
 import { vector } from "excalibur/build/dist/Util/DrawUtil"
@@ -60,11 +60,13 @@ export class Player extends Actor {
 
 
     onPostUpdate(engine, delta) {
-
         this.pInput(engine);
         this.pMove(delta);
         Player.playerPos = this.pos
         Player.playerVel = this.vel;
+
+        console.log(Player.playerPos);
+        this.pos.x = clamp(this.pos.x,-1375,1375)
 
         if(!Player.isGoku)
         {
