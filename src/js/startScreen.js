@@ -120,7 +120,7 @@ export class StartScreen extends Scene {
             font: new Font({
                 size: 50,
                 color: Color.White,
-                bold: true,
+                bold: false,
                 family: 'Impact',
             }),
         });
@@ -200,7 +200,7 @@ export class StartScreen extends Scene {
 
                 const startHelpText = this.actors.find(actor => actor.hasTag('startHelpText'));
                 if (!this.difficultyConfirmed) {
-                    startHelpText.text = 'Press enter to Start​​​​​'
+                    startHelpText.text = '🇵​​​​​🇷​​​​​🇪​​​​​🇸​​​​​🇸​​​​​ 🇪​​​​​🇳​​​​​🇹​​​​​🇪​​​​​🇷​​​​​ 🇹​​​​​🇴​​​​​ 🇸​​​​​🇹​​​​​🇦​​​​​🇷​​​​​🇹​​​​​​​​​'
                 }
                 this.difficultyConfirmed = true;
                 this.blinkTimer.start()
@@ -215,8 +215,7 @@ export class StartScreen extends Scene {
             const startButton = this.actors.find(actor => actor.hasTag('startButton'));
             startButton.color = Color.Gray
         }
-
-        if (engine.input.keyboard.wasPressed(Keys.Enter)) {
+        if (engine.input.keyboard.wasPressed(Keys.Enter) && this.difficultyConfirmed === true) {
             this.startGame();
         }
     }
@@ -225,7 +224,7 @@ export class StartScreen extends Scene {
         if (startHelpText && startHelpText.text != "") {
             startHelpText.text = ""
         } else if (startHelpText && startHelpText.text === "") {
-            startHelpText.text = 'Press enter to Start​​​​​'
+            startHelpText.text = '🇵​​​​​🇷​​​​​🇪​​​​​🇸​​​​​🇸​​​​​ 🇪​​​​​🇳​​​​​🇹​​​​​🇪​​​​​🇷​​​​​ 🇹​​​​​🇴​​​​​ 🇸​​​​​🇹​​​​​🇦​​​​​🇷​​​​​🇹​​​​​'
         }
     }
     startGame() {
