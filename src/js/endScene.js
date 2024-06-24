@@ -1,8 +1,9 @@
-import { Actor, Canvas, CollisionGroup, Color, Font, Graphic, Label, Raster, Rectangle, Scene, ScreenElement, Shape, Text, Vector } from "excalibur";
+import { Actor, Canvas, CollisionGroup, Color, Font, Graphic, Input, Label, Raster, Rectangle, Scene, ScreenElement, Shape, Text, Vector,Keys} from "excalibur";
 import { gameTimer } from "./gameTimer";
 import { StartScreen } from "./startScreen";
 import { Highscore } from "./highscoredisplay";
 import { Restart } from "./restart";
+import { Game } from "./game";
 export class Endscene extends Scene {
 
     leaderboardText
@@ -64,5 +65,17 @@ export class Endscene extends Scene {
         restartButton.addChild(restartText);
         restartButton.on('pointerup', () => Restart.restart());
         this.add(restartButton);
+    }
+    onPostUpdate(engine)
+    {
+        let gpadRestart=false;
+        if(Game.gpad!=null)
+        {
+              gpadRestart=Game.gpad.isButtonPressed(Buttons.Face1);
+        }
+        if(engine.input.keyboard.wasPressed(Keys.Enter)|| gpadRestart)
+        {
+            Restart.restart();
+        }
     }
 }
