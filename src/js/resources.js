@@ -19,6 +19,7 @@ const Resources = {
     Sky3: new ImageSource('images/Lucht-3.png'),
     Cloud: new ImageSource('images/cloudd.png'),
     Goku: new ImageSource('images/goku-front.png'),
+    FireAnim: new ImageSource('images/vuur.png'),
     KnockBack: new Sound('images/knockback.mp3'),
     Background: new Sound('images/background-music.mp3')
     //Enemy Resources
