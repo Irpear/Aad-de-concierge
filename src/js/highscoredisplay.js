@@ -59,7 +59,7 @@ export class Highscore extends ScreenElement {
         
         localStorage.setItem("highscore"+Endscene.difficultyString+Endscene.modeString, JSON.stringify(highScoreList))
         Highscore.playerScores = highScoreList
-        if(curIndex==4 && highScoreList.length==5)
+        if(curIndex==5 && highScoreList.length==5)
             {
                 highScoreList.push(currentPlayer);
             }

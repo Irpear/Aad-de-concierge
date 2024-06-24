@@ -11,7 +11,6 @@ export class Restart
     static restart()
     {
         StartScreen.playerName="";
-        StartScreen.selectedDifficulty= 0;
         Player.playerPos = new Vector(0,0);
         Player.playerVel = new Vector(0,0);
         gameTimer.endTime = "";
