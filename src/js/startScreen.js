@@ -1,4 +1,5 @@
-import { Actor, Color, Font, Keys, Label, Scene, Vector } from "excalibur";
+
+import { Actor, Color, Font, Keys, Label, Scene, Timer, Vector } from "excalibur";
 import { NameInput } from "./nameInput";
 import { projectileSpawner } from "./projectileSpawner";
 import { birdSpawner } from "./birdSpawner";
@@ -11,15 +12,26 @@ export class StartScreen extends Scene {
     static playerName;
     selectedLetterSlot = 0;
     difficultyActors = [];
+    difficultyConfirmed = false;
+    blinkTimer;
 
     onInitialize() {
+        this.blinkTimer = new Timer({
+            fcn: () => this.blinkingHandler(),
+            repeats: true,
+            interval: 500,
+        })
+        this.add(this.blinkTimer)
+
         const title = new Label({
             text: 'I Mast Ascend',
             pos: new Vector(this.engine.drawWidth / 2, 100),
             font: new Font({
                 family: 'impact',
+                color: Color.Yellow,
                 size: 120,
             }),
+
         });
         title.anchor = new Vector(0.5, 0.5);
 
@@ -47,7 +59,7 @@ export class StartScreen extends Scene {
         subtitle2.anchor = new Vector(0.5, 0.5);
 
         const subtitle3 = new Label({
-            text: '(Move joystick up/down to select letter & move right to confirm)',
+            text: '(Move the joystick to select and confirm name & difficulty)',
             pos: new Vector(this.engine.drawWidth / 2, 340),
             font: new Font({
                 size: 26,
@@ -173,18 +185,18 @@ export class StartScreen extends Scene {
 
     onPreUpdate(engine) {
         if (engine.input.keyboard.wasPressed(Keys.Right)) {
-            if (this.selectedLetterSlot < 6) {
+            if (this.selectedLetterSlot < 6 && !this.difficultyConfirmed) {
                 this.selectedLetterSlot++;
             }
-            if (this.nameConfirmed && StartScreen.selectedDifficulty < 2) {
+            if (this.nameConfirmed && StartScreen.selectedDifficulty < 2 && !this.difficultyConfirmed) {
                 StartScreen.selectedDifficulty++;
             }
         }
         if (engine.input.keyboard.wasPressed(Keys.Left)) {
-            if (this.selectedLetterSlot > 0) {
+            if (this.selectedLetterSlot > 0 && !this.difficultyConfirmed) {
                 this.selectedLetterSlot--;
             }
-            if (this.nameConfirmed && StartScreen.selectedDifficulty > 0) {
+            if (this.nameConfirmed && StartScreen.selectedDifficulty > 0 && !this.difficultyConfirmed) {
                 StartScreen.selectedDifficulty--;
             }
         }
@@ -206,6 +218,48 @@ export class StartScreen extends Scene {
         } else {
             this.nameConfirmed = false;
             StartScreen.selectedDifficulty = -1
+        }
+
+        if (engine.input.keyboard.wasPressed(Keys.Down)) {
+            if (StartScreen.selectedDifficulty >= 0) {
+                if (!this.helpTextAdded) {
+                    // Create and configure helping text
+                    const startHelpText = new Label({
+                        font: new Font({
+                            size: 40,
+                            color: Color.White,
+                        }),
+                        pos: new Vector(this.engine.drawWidth / 2, 730),
+                    });
+                    startHelpText.addTag("startHelpText")
+                    startHelpText.anchor = new Vector(0.5, 0.5)
+
+                    this.add(startHelpText)
+                    this.helpTextAdded = true;
+                }
+
+                const startHelpText = this.actors.find(actor => actor.hasTag('startHelpText'));
+                if (!this.difficultyConfirmed) {
+                    startHelpText.text = "🇵​​​​​🇷​​​​​🇪​​​​​🇸​​​​​🇸​​​​​ 🇪​​​​​🇳​​​​​🇹​​​​​🇪​​​​​🇷​​​​​ 🇹​​​​​🇴​​​​​ 🇸​​​​​🇹​​​​​🇦​​​​​🇷​​​​​🇹​​​​"
+                }
+                this.difficultyConfirmed = true;
+                this.blinkTimer.start()
+
+            }
+        }
+        if (engine.input.keyboard.wasPressed(Keys.Up) && this.difficultyConfirmed === true) {
+            const startHelpText = this.actors.find(actor => actor.hasTag('startHelpText'));
+            this.difficultyConfirmed = false
+            this.blinkTimer.stop()
+            startHelpText.text = ""
+        }
+    }
+    blinkingHandler() {
+        const startHelpText = this.actors.find(actor => actor.hasTag('startHelpText'));
+        if (startHelpText && startHelpText.text != "") {
+            startHelpText.text = ""
+        } else if (startHelpText && startHelpText.text === "") {
+            startHelpText.text = '🇵​​​​​🇷​​​​​🇪​​​​​🇸​​​​​🇸​​​​​ 🇪​​​​​🇳​​​​​🇹​​​​​🇪​​​​​🇷​​​​​ 🇹​​​​​🇴​​​​​ 🇸​​​​​🇹​​​​​🇦​​​​​🇷​​​​​🇹​​​​​'
         }
     }
 }
