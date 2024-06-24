@@ -51,14 +51,9 @@ export class Player extends Actor {
                 gokuSprite.scale = new Vector(0.1,0.1);
                 this.graphics.use(gokuSprite);
             }
-            else
-            {
-                this.scale = new Vector(0.75,0.75);
-            }
         this.collider.set(Shape.Box(84, 128, new Vector(0.5, 0.33))) // Makes sure that the Player stand on the platform and doesnt pass through the platform
         this.body.collisionType = CollisionType.Active;
         this.pos = new Vector(0, 300)
-       
     }
 
 
@@ -71,7 +66,7 @@ export class Player extends Actor {
         Player.playerVel = this.vel;
 
         console.log(Player.playerPos);
-        this.pos.x = clamp(this.pos.x,-1375,1375)
+        this.pos.x = clamp(this.pos.x,-1385,1385)
 
         if(!Player.isGoku)
         {
