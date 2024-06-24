@@ -21,7 +21,7 @@ const Resources = {
     Goku: new ImageSource('images/goku-front.png'),
     FireAnim: new ImageSource('images/vuur.png'),
     KnockBack: new Sound('images/knockback.mp3'),
-    Background: new Sound('images/background-music.mp3')
+    BackgroundMusic: new Sound('images/background-music.mp3')
     //Enemy Resources
 
     //Background Resources
