@@ -13,9 +13,9 @@ export class cameraFollow extends Actor {
         super.onPreUpdate();
         // console.log(this.player);
         if (this.player.pos.y < -280) {
-            this.pos = new Vector(this.pos.x, this.player.pos.y)
+            this.pos = new Vector(10, this.player.pos.y)
         } else {
-            this.pos = new Vector(this.pos.x, -280)
+            this.pos = new Vector(20, -280)
         }
         cameraFollow.camPos=this.pos;
     }
