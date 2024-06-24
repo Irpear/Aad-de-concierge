@@ -20,7 +20,8 @@ export class Highscore extends ScreenElement {
         if (!leaderStorage) {
             highScoreList = []
         }
-      //  console.log("ee1")
+
+
         let currentPlayer = { PlayerName: "", PlayerTime: "", TimeNumber: -1 };
         currentPlayer.PlayerName = StartScreen.playerName
         currentPlayer.PlayerTime = gameTimer.endTime
@@ -54,7 +55,8 @@ export class Highscore extends ScreenElement {
 
         }
         highScoreList = highScoreList.slice(0, 5)
-       // console.log("eee")
+
+        
         localStorage.setItem("highscore"+Endscene.difficultyString+Endscene.modeString, JSON.stringify(highScoreList))
         Highscore.playerScores = highScoreList
         if(curIndex==4 && highScoreList.length==5)
