@@ -8,6 +8,7 @@ import { Endscene } from './endScene.js'
 
 export class Game extends Engine {
     static gpad=null;
+    static game;
     constructor() {
         super({
             width: 1440,
@@ -36,6 +37,7 @@ export class Game extends Engine {
           Game.gpad = connectevent.gamepad
           Game.controller = connectevent.controller;
       })
+      Game.game = this;
     }
 }
 

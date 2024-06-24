@@ -16,7 +16,8 @@ const Resources = {
     Mast3: new ImageSource('images/Background3.png'),
     Cloud: new ImageSource('images/cloudd.png'),
     Goku: new ImageSource('images/goku-front.png'),
-    KnockBack: new Sound('images/knockback.mp3')
+    KnockBack: new Sound('images/knockback.mp3'),
+    Background: new Sound('images/background-music.mp3')
     //Enemy Resources
 
     //Background Resources
