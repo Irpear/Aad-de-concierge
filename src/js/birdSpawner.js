@@ -15,7 +15,7 @@ export class birdSpawner extends Actor {
     }
     onPreUpdate(_engine, _delta) {
         this.timeSinceLastSpawn += _delta * 0.01;
-        if (this.timeSinceLastSpawn >= birdSpawner.spawnInterval && Player.playerVel.y <= 200) {
+        if (this.timeSinceLastSpawn >= birdSpawner.spawnInterval && Player.playerVel.y <= 400) {
             this.SpawnBird();
         }
     }

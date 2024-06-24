@@ -71,7 +71,7 @@ export class Player extends Actor {
         this.pMove(delta);
         Player.playerPos = this.pos
         Player.playerVel = this.vel;
-
+      //  console.log(Player.playerVel.y);
      //   console.log(Player.playerPos);
         this.pos.x = clamp(this.pos.x,-1385,1385)
 
@@ -119,6 +119,7 @@ export class Player extends Actor {
     }
     // Calculate and apply velocity
     pMove(delta) {
+      
         let xvel = mathFunction.Lerp(this.vel.x, this.xspeed, delta * 0.005);
         let yvel = 0;
         if(Player.isGoku){
@@ -176,8 +177,8 @@ export class Player extends Actor {
 
     knockUp(projPos) {
         //let yd = this.pos.y-projPos.y 
-        let yk = Math.max(Math.random(), 0.5) * -6000
-        let xk = Math.sign(this.pos.x - projPos.x) * mathFunction.Lerp(100, 300, Math.random());
+        let yk = Math.max(Math.random(), 0.5) * -4250
+        let xk = Math.sign(this.pos.x - projPos.x) * mathFunction.Lerp(200, 500, Math.random());
 
         this.kbTime = 1.5;
         this.kbVel = new Vector(xk, yk);
