@@ -15,8 +15,14 @@ import { birdSpawner } from "./birdSpawner";
 
 export class Level extends Scene {
     timer
+    static scene;
     onInitialize(engine) {
 
+
+        Level.scene = this;
+    }
+
+    onActivate(ctx) {
         //TODO background Image is not centered if there is time over should be fixed
         //Background
         const mast3 = new Actor();
@@ -79,10 +85,6 @@ export class Level extends Scene {
         let BirdSpawner = new birdSpawner();
         this.add(BirdSpawner);
         Resources.Background.play(0.5)
-    }
-
-    onActivate(ctx) {
-        console.log("reset het level")
     }
 
 

@@ -2,13 +2,19 @@ import { Actor, Canvas, CollisionGroup, Color, Font, Graphic, Label, Raster, Rec
 import { gameTimer } from "./gameTimer";
 import { StartScreen } from "./startScreen";
 import { Highscore } from "./highscoredisplay";
+import { Restart } from "./restart";
 export class Endscene extends Scene {
 
     leaderboardText
     playerInfo
     static difficultyString;
     static modeString;
+    static scene;
     onInitialize() {
+        Endscene.scene = this;
+    }
+    onActivate(ctx)
+    {
         console.log("Je bent bij de eindscene");
         const sElement = new ScreenElement()
         const playersInfo = localStorage.getItem('leaderboard');
@@ -39,6 +45,24 @@ export class Endscene extends Scene {
         ModeDifficulty.anchor=new Vector(0.5,0.5)
         this.add(ModeDifficulty);
 
+        const restartButton = new Actor({
+            pos: new Vector(this.engine.drawWidth / 2, 800),
+            width: 270,
+            height: 80,
+            color: Color.Gray,
+        });
+        const restartText = new Label({
+            text: 'Replay',
+            font: new Font({
+                size: 50,
+                color: Color.White,
+                bold: true,
+                family: 'Impact',
+            }),
+        });
+        restartText.anchor = new Vector(0.5, 0.5);
+        restartButton.addChild(restartText);
+        restartButton.on('pointerup', () => Restart.restart());
+        this.add(restartButton);
     }
-
 }
