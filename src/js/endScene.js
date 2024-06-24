@@ -1,9 +1,10 @@
-import { Actor, Canvas, CollisionGroup, Color, Font, Graphic, Input, Label, Raster, Rectangle, Scene, ScreenElement, Shape, Text, Vector,Keys} from "excalibur";
+import { Actor, Canvas, CollisionGroup, Color, Font, Graphic, Input, Label, Raster, Rectangle, Scene, ScreenElement, Shape, Text, Vector, Keys, Buttons } from "excalibur";
 import { gameTimer } from "./gameTimer";
 import { StartScreen } from "./startScreen";
 import { Highscore } from "./highscoredisplay";
 import { Restart } from "./restart";
 import { Game } from "./game";
+import { Resources } from "./resources";
 export class Endscene extends Scene {
 
     leaderboardText
@@ -14,8 +15,7 @@ export class Endscene extends Scene {
     onInitialize() {
         Endscene.scene = this;
     }
-    onActivate(ctx)
-    {
+    onActivate(ctx) {
         console.log("Je bent bij de eindscene");
         const sElement = new ScreenElement()
         const playersInfo = localStorage.getItem('leaderboard');
@@ -33,17 +33,17 @@ export class Endscene extends Scene {
         });
         this.leaderboardText.anchor = new Vector(0.5, 0.5)
         this.add(this.leaderboardText)
-        
+
         let ModeDifficulty = new Label({
-            text: Endscene.modeString+" "+Endscene.difficultyString,
-            pos: new Vector(this.engine.drawWidth / 2, this.engine.drawHeight / 6+120),
+            text: Endscene.modeString + " " + Endscene.difficultyString,
+            pos: new Vector(this.engine.drawWidth / 2, this.engine.drawHeight / 6 + 120),
             font: new Font({
                 family: 'impact',
                 size: 90,
             }),
             color: Color.Yellow
         });
-        ModeDifficulty.anchor=new Vector(0.5,0.5)
+        ModeDifficulty.anchor = new Vector(0.5, 0.5)
         this.add(ModeDifficulty);
 
         const restartButton = new Actor({
@@ -66,16 +66,17 @@ export class Endscene extends Scene {
         restartButton.on('pointerup', () => Restart.restart());
         this.add(restartButton);
     }
-    onPostUpdate(engine)
-    {
-        let gpadRestart=false;
-        if(Game.gpad!=null)
-        {
-              gpadRestart=Game.gpad.isButtonPressed(Buttons.Face1);
+    onPostUpdate(engine) {
+        let gpadRestart = false;
+        if (Game.gpad != null) {
+            gpadRestart = Game.gpad.isButtonPressed(Buttons.Face1);
         }
-        if(engine.input.keyboard.wasPressed(Keys.Enter)|| gpadRestart)
-        {
+        if (engine.input.keyboard.wasPressed(Keys.Enter) || gpadRestart) {
             Restart.restart();
         }
+    }
+    onDeactivate() {
+        console.log("Stop Music")
+        Resources.Background.stop()
     }
 }

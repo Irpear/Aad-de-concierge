@@ -5,6 +5,7 @@ import { birdSpawner } from "./birdSpawner";
 import { Player } from "./player";
 import { Endscene } from "./endScene";
 import { Game } from "./game";
+import { Resources } from "./resources";
 
 export class StartScreen extends Scene {
     game;
@@ -142,7 +143,6 @@ export class StartScreen extends Scene {
         this.add(subtitle3);
         this.add(startButton);
     }
-
     onPreUpdate(engine) {
         if (Game.gpad != null) {
             this.gpadX = Game.gpad.getAxes(Axes.LeftStickX);
@@ -224,7 +224,7 @@ export class StartScreen extends Scene {
                 startButton.color = Color.Gray
             }
         }
-        if (engine.input.keyboard.wasPressed(Keys.Enter) || this.bpress && this.difficultyConfirmed === true) {
+        if (engine.input.keyboard.wasPressed(Keys.Enter) && this.difficultyConfirmed === true || this.bpress && this.difficultyConfirmed === true) {
             this.startGame();
         }
 

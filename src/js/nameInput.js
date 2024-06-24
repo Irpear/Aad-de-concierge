@@ -47,14 +47,14 @@ export class NameInput extends Actor {
 
         if (this.thisTag == this.scene.selectedLetterSlot) {
             this.color = Color.Green
-            if (engine.input.keyboard.wasPressed(Keys.Down) || this.gpadY < 0 && this.stickMovedY === false) {
+            if (engine.input.keyboard.wasPressed(Keys.Up) || this.gpadY > 0 && this.stickMovedY === false) {
                 if (this.selectedLetter > 24) {
                     this.selectedLetter = -1
                 }
                 this.selectedLetter++
                 this.letterLabel.text = this.alphabet[this.selectedLetter]
             }
-            if (engine.input.keyboard.wasPressed(Keys.Up) || this.gpadY > 0 && this.stickMovedY === false) {
+            if (engine.input.keyboard.wasPressed(Keys.Down) || this.gpadY < 0 && this.stickMovedY === false) {
                 if (this.thisTag == this.scene.selectedLetterSlot) {
                     if (this.selectedLetter < 1) {
                         this.selectedLetter = 26
