@@ -130,51 +130,8 @@ export class StartScreen extends Scene {
         startButton.addChild(startButtonText);
 
         // Add an event listener for the start button
-        startButton.on('pointerup', () => {
-            StartScreen.playerName = '';
-            // Collect the player's name from the inputs
-            for (let i = 0; i < this.inputs.length; i++) {
-                StartScreen.playerName += this.inputs[i].alphabet[this.inputs[i].selectedLetter];
-            }
-            switch (StartScreen.selectedDifficulty) {
-                case 0:
-                    Endscene.difficultyString = "Easy"
-                    projectileSpawner.spawnInterval = 10;
-                    birdSpawner.spawnInterval = 20;
-
-                    break;
-                case 1:
-                    Endscene.difficultyString = "Normal"
-                    projectileSpawner.spawnInterval = 7.5;
-                    birdSpawner.spawnInterval = 15;
-
-                    break;
-                case 2:
-                    Endscene.difficultyString = "Hard"
-                    projectileSpawner.spawnInterval = 5;
-                    birdSpawner.spawnInterval = 10;
-
-                    break;
-                default:
-                    Endscene.difficultyString = "Normal"
-                    projectileSpawner.spawnInterval = 7.5;
-                    birdSpawner.spawnInterval = 15;
-                    break;
-            }
-            switch (StartScreen.playerName) {
-                default:
-                    Player.isGoku = false;
-                    Endscene.modeString = "";
-                    this.engine.goToScene('level');
-                    break;
-                case "GOKU":
-                    Endscene.modeString = "Goku-mode";
-                    Player.isGoku = true;
-                    this.engine.goToScene('level');
-                    break;
-            }
-
-        });
+        startButton.on('pointerup', () => this.startGame()
+        );
 
         // Add actors
         this.add(title);
@@ -243,7 +200,7 @@ export class StartScreen extends Scene {
 
                 const startHelpText = this.actors.find(actor => actor.hasTag('startHelpText'));
                 if (!this.difficultyConfirmed) {
-                    startHelpText.text = "🇵​​​​​🇷​​​​​🇪​​​​​🇸​​​​​🇸​​​​​ 🇪​​​​​🇳​​​​​🇹​​​​​🇪​​​​​🇷​​​​​ 🇹​​​​​🇴​​​​​ 🇸​​​​​🇹​​​​​🇦​​​​​🇷​​​​​🇹​​​​"
+                    startHelpText.text = 'Press enter to Start​​​​​'
                 }
                 this.difficultyConfirmed = true;
                 this.blinkTimer.start()
@@ -258,14 +215,108 @@ export class StartScreen extends Scene {
             const startButton = this.actors.find(actor => actor.hasTag('startButton'));
             startButton.color = Color.Gray
         }
+
+        if (engine.input.keyboard.wasPressed(Keys.Enter)) {
+            this.startGame();
+        }
     }
     blinkingHandler() {
         const startHelpText = this.actors.find(actor => actor.hasTag('startHelpText'));
         if (startHelpText && startHelpText.text != "") {
             startHelpText.text = ""
         } else if (startHelpText && startHelpText.text === "") {
-            startHelpText.text = '🇵​​​​​🇷​​​​​🇪​​​​​🇸​​​​​🇸​​​​​ 🇪​​​​​🇳​​​​​🇹​​​​​🇪​​​​​🇷​​​​​ 🇹​​​​​🇴​​​​​ 🇸​​​​​🇹​​​​​🇦​​​​​🇷​​​​​🇹​​​​​'
+            startHelpText.text = 'Press enter to Start​​​​​'
         }
+    }
+    startGame() {
+        StartScreen.playerName = '';
+        // Collect the player's name from the inputs
+        for (let i = 0; i < this.inputs.length; i++) {
+            StartScreen.playerName += this.inputs[i].alphabet[this.inputs[i].selectedLetter];
+        }
+        switch (StartScreen.selectedDifficulty) {
+            case 0:
+                Endscene.difficultyString = "Easy"
+                projectileSpawner.spawnInterval = 10;
+                birdSpawner.spawnInterval = 20;
+
+                break;
+            case 1:
+                Endscene.difficultyString = "Normal"
+                projectileSpawner.spawnInterval = 7.5;
+                birdSpawner.spawnInterval = 15;
+
+                break;
+            case 2:
+                Endscene.difficultyString = "Hard"
+                projectileSpawner.spawnInterval = 5;
+                birdSpawner.spawnInterval = 10;
+
+                break;
+            default:
+                Endscene.difficultyString = "Normal"
+                projectileSpawner.spawnInterval = 7.5;
+                birdSpawner.spawnInterval = 15;
+                break;
+        }
+        switch (StartScreen.playerName) {
+            default:
+                Player.isGoku = false;
+                Endscene.modeString = "";
+                this.engine.goToScene('level');
+                break;
+            case "GOKU":
+                Endscene.modeString = "Goku-mode";
+                Player.isGoku = true;
+                this.engine.goToScene('level');
+                break;
+        }
+
+    }
+    startGame() {
+        StartScreen.playerName = '';
+        // Collect the player's name from the inputs
+        for (let i = 0; i < this.inputs.length; i++) {
+            StartScreen.playerName += this.inputs[i].alphabet[this.inputs[i].selectedLetter];
+        }
+        switch (StartScreen.selectedDifficulty) {
+            case 0:
+                Endscene.difficultyString = "Easy"
+                projectileSpawner.spawnInterval = 10;
+                birdSpawner.spawnInterval = 20;
+
+                break;
+            case 1:
+                Endscene.difficultyString = "Normal"
+                projectileSpawner.spawnInterval = 7.5;
+                birdSpawner.spawnInterval = 15;
+
+                break;
+            case 2:
+                Endscene.difficultyString = "Hard"
+                projectileSpawner.spawnInterval = 5;
+                birdSpawner.spawnInterval = 10;
+
+                break;
+            default:
+                Endscene.difficultyString = "Normal"
+                projectileSpawner.spawnInterval = 7.5;
+                birdSpawner.spawnInterval = 15;
+                break;
+        }
+        switch (StartScreen.playerName) {
+            default:
+                Player.isGoku = false;
+                Endscene.modeString = "";
+                this.engine.goToScene('level');
+                break;
+            case "GOKU":
+                Endscene.modeString = "Goku-mode";
+                Player.isGoku = true;
+                this.engine.goToScene('level');
+                break;
+        }
+
     }
 
 }

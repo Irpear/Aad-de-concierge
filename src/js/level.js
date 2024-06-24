@@ -43,6 +43,32 @@ export class Level extends Scene {
         mast2.scale = new Vector(2, 2)
         this.add(mast2);
 
+
+        //Sky
+        const sky3 = new Actor();
+        sky3.graphics.use(Resources.Sky3.toSprite());
+        sky3.pos = new Vector(12, -18500)
+        sky3.scale = new Vector(3, -2)
+        sky3.z = -500;
+        this.add(sky3);
+
+        const sky1 = new Actor();
+        sky1.graphics.use(Resources.Sky1.toSprite());
+        sky1.pos = new Vector(0, -3400)
+        sky1.scale = new Vector(3, -2)
+        sky1.z = -500;
+        this.add(sky1);
+
+        const sky2 = new Actor();
+        sky2.graphics.use(Resources.Sky2.toSprite());
+        sky2.pos = new Vector(12, -11400)
+        sky2.scale = new Vector(3, -2)
+        sky2.z = -500;
+        this.add(sky2);
+
+
+
+
         //player object
         //Haha i won't change this
         let Goku = new Player()
