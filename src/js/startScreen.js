@@ -55,7 +55,7 @@ export class StartScreen extends Scene {
         subtitle.anchor = new Vector(0.5, 0.5);
 
         const subtitle2 = new Label({
-            text: 'Enter your name & select difficulty using the joystick',
+            text: 'Enter your name & select difficulty',
             pos: new Vector(this.engine.drawWidth / 2, 300),
             font: new Font({
                 size: 30,
@@ -67,7 +67,7 @@ export class StartScreen extends Scene {
         subtitle2.anchor = new Vector(0.5, 0.5);
 
         const subtitle3 = new Label({
-            text: '(Move the joystick to select and confirm name & difficulty)',
+            text: '(Move the joystick or use the arrow keys to select and confirm name & difficulty)',
             pos: new Vector(this.engine.drawWidth / 2, 340),
             font: new Font({
                 size: 26,
