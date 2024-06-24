@@ -100,7 +100,7 @@ export class StartScreen extends Scene {
             pos: new Vector(this.engine.drawWidth / 2, 800),
             width: 270,
             height: 80,
-            color: Color.Green,
+            color: Color.Gray,
         });
         const startButtonText = new Label({
             text: 'Start Game',
@@ -125,43 +125,42 @@ export class StartScreen extends Scene {
             }
             switch (StartScreen.selectedDifficulty) {
                 case 0:
-                    Endscene.difficultyString="Easy"
+                    Endscene.difficultyString = "Easy"
                     projectileSpawner.spawnInterval = 10;
                     birdSpawner.spawnInterval = 20;
 
                     break;
                 case 1:
-                    Endscene.difficultyString="Normal"
+                    Endscene.difficultyString = "Normal"
                     projectileSpawner.spawnInterval = 7.5;
                     birdSpawner.spawnInterval = 15;
 
                     break;
                 case 2:
-                    Endscene.difficultyString="Hard"
+                    Endscene.difficultyString = "Hard"
                     projectileSpawner.spawnInterval = 5;
                     birdSpawner.spawnInterval = 10;
 
                     break;
                 default:
-                    Endscene.difficultyString="Normal"
+                    Endscene.difficultyString = "Normal"
                     projectileSpawner.spawnInterval = 7.5;
                     birdSpawner.spawnInterval = 15;
                     break;
             }
-            switch(StartScreen.playerName)
-            {
+            switch (StartScreen.playerName) {
                 default:
-                    Player.isGoku=false;
-                    Endscene.modeString ="";
+                    Player.isGoku = false;
+                    Endscene.modeString = "";
                     this.engine.goToScene('level');
                     break;
                 case "GOKU":
-                    Endscene.modeString ="Goku-mode";
-                    Player.isGoku=true;
+                    Endscene.modeString = "Goku-mode";
+                    Player.isGoku = true;
                     this.engine.goToScene('level');
                     break;
             }
-          
+
         });
 
         // Add actors
@@ -201,8 +200,12 @@ export class StartScreen extends Scene {
 
         if (this.selectedLetterSlot >= 4) {
             this.nameConfirmed = true;
+            if (StartScreen.selectedDifficulty === -1) {
+                StartScreen.selectedDifficulty = 0
+            }
         } else {
             this.nameConfirmed = false;
+            StartScreen.selectedDifficulty = -1
         }
     }
 }
