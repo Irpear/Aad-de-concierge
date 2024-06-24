@@ -18,7 +18,7 @@ export class projectileSpawner extends Actor
     onPreUpdate(_engine,_delta)
     {
         this.timeSinceLastSpawn+=_delta*0.01;
-        if(this.timeSinceLastSpawn>=projectileSpawner.spawnInterval && Player.playerVel.y<=200)
+        if(this.timeSinceLastSpawn>=projectileSpawner.spawnInterval && Player.playerVel.y<=400)
             {
                 this.SpawnProjectile();
             }

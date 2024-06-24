@@ -301,26 +301,26 @@ export class StartScreen extends Scene {
         switch (StartScreen.selectedDifficulty) {
             case 0:
                 Endscene.difficultyString = "Easy"
-                projectileSpawner.spawnInterval = 10;
-                birdSpawner.spawnInterval = 20;
+                projectileSpawner.spawnInterval = 12.5;
+                birdSpawner.spawnInterval = 22.5;
 
                 break;
             case 1:
                 Endscene.difficultyString = "Normal"
-                projectileSpawner.spawnInterval = 7.5;
-                birdSpawner.spawnInterval = 15;
+                projectileSpawner.spawnInterval = 9;
+                birdSpawner.spawnInterval = 17.5;
 
                 break;
             case 2:
                 Endscene.difficultyString = "Hard"
-                projectileSpawner.spawnInterval = 5;
-                birdSpawner.spawnInterval = 10;
+                projectileSpawner.spawnInterval = 6.5;
+                birdSpawner.spawnInterval = 12.5;
 
                 break;
             default:
                 Endscene.difficultyString = "Normal"
-                projectileSpawner.spawnInterval = 7.5;
-                birdSpawner.spawnInterval = 15;
+                projectileSpawner.spawnInterval = 9;
+                birdSpawner.spawnInterval = 17.5;
                 break;
         }
         switch (StartScreen.playerName) {

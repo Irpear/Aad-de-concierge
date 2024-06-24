@@ -15,7 +15,7 @@ export class cameraFollow extends Actor {
         if (this.player.pos.y < -280) {
             this.pos = new Vector(10, this.player.pos.y)
         } else {
-            this.pos = new Vector(20, -280)
+            this.pos = new Vector(10, -280)
         }
         cameraFollow.camPos=this.pos;
     }
