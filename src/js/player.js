@@ -1,8 +1,9 @@
-import { Actor, CollisionType, Keys, Vector, Shape, Debug, Physics, Ray, Animation, range, SpriteSheet, Graphic, ConsoleAppender, clamp } from "excalibur"
+import { Actor, CollisionType, Keys, Vector, Shape, Debug, Physics, Ray, Animation, range, SpriteSheet, Graphic, ConsoleAppender, clamp,Axes,Buttons } from "excalibur"
 import { Resources } from "./resources"
 import { mathFunction } from "./mathFunctions"
 import { vector } from "excalibur/build/dist/Util/DrawUtil"
 import { StartScreen } from "./startScreen"
+import { Game } from "./game"
 
 export class Player extends Actor {
     game
@@ -18,6 +19,8 @@ export class Player extends Actor {
     static playerPos;
     static playerVel;
     static isGoku=false;
+
+    landed=true;
     constructor() {
         super({
             width: 100,
@@ -92,20 +95,22 @@ export class Player extends Actor {
         //console.log(this.vel)
         this.xspeed = 0;
         this.yspeed = 0;
-        if (engine.input.keyboard.isHeld(Keys.Left) || engine.input.keyboard.isHeld(Keys.A)) {
+        let gpadX =  Game.gpad.getAxes(Axes.LeftStickX)
+        let gpadY = Game.gpad.getAxes(Axes.LeftStickY)
+        if (engine.input.keyboard.isHeld(Keys.Left) || engine.input.keyboard.isHeld(Keys.A) || gpadX<0) {
             this.xspeed = -500
         }
-        if (engine.input.keyboard.isHeld(Keys.Right) || engine.input.keyboard.isHeld(Keys.D)) {
+        if (engine.input.keyboard.isHeld(Keys.Right) || engine.input.keyboard.isHeld(Keys.D)|| gpadX>0) {
             this.xspeed = 500
         }
-        if (engine.input.keyboard.isHeld(Keys.Up) || engine.input.keyboard.isHeld(Keys.W)) {
+        if (engine.input.keyboard.isHeld(Keys.Up) || engine.input.keyboard.isHeld(Keys.W)|| gpadY>0) {
             this.yspeed = -1500
         }
-        if (engine.input.keyboard.isHeld(Keys.Down) || engine.input.keyboard.isHeld(Keys.S)) {
+        if (engine.input.keyboard.isHeld(Keys.Down) || engine.input.keyboard.isHeld(Keys.S)|| gpadY<0) {
             this.yspeed = 1500
         }
         // When the Spacebar is pressed jump 
-        this.doJump = engine.input.keyboard.wasPressed(Keys.Space);
+        this.doJump = engine.input.keyboard.wasPressed(Keys.Space) || Game.gpad.isButtonPressed(Buttons.Face1);
     }
     // Calculate and apply velocity
     pMove(delta) {
@@ -118,10 +123,11 @@ export class Player extends Actor {
         {
              yvel = mathFunction.Lerp(this.vel.y, 1000, delta * 0.01);
         }
-        if (this.doJump && !this.isJumping && Math.abs(this.vel.y) < 850) {
+        if (this.doJump && !this.isJumping && Math.abs(this.vel.y) < 850 && this.landed) {
 
             this.isJumping = true;
             this.jumpTime = 0;
+            this.landed = false;
         }
         if (this.isJumping) {
             let jt = Math.sqrt(mathFunction.quadraticFormula(-1, 0, 1, this.jumpTime / this.jumpDuration));
@@ -134,7 +140,13 @@ export class Player extends Actor {
             if (this.jumpTime > this.jumpDuration) {
                 this.isJumping = false;
             }
-
+        }
+        else
+        {
+            if(Math.abs(this.vel.y)<100)
+                {
+                    this.landed = true;
+                }
         }
         if (this.kbTime <= 0) {
             this.vel = new Vector(xvel, yvel);

@@ -7,7 +7,7 @@ import { StartScreen } from './startScreen.js'
 import { Endscene } from './endScene.js'
 
 export class Game extends Engine {
-
+    static gpad=null;
     constructor() {
         super({
             width: 1440,
@@ -28,6 +28,14 @@ export class Game extends Engine {
         this.add('level', this.level)
         this.goToScene('startScreen')
       //this.toggleDebug()
+   
+     
+      this.input.gamepads.enabled = true;
+      this.input.gamepads.on('connect', (connectevent) => {
+          console.log("gamepad detected")
+          Game.gpad = connectevent.gamepad
+          Game.controller = connectevent.controller;
+      })
     }
 }
 
