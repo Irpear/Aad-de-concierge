@@ -1,8 +1,18 @@
-// @ts-nocheck
-import { Actor, Color, Engine, Font, Input, Keys, Label, Vector } from "excalibur";
+
+import { Actor, Axes, Buttons, Color, Engine, Font, Input, Keys, Label, Vector } from "excalibur";
 import { StartScreen } from "./startScreen";
+import { Game } from "./game";
 
 export class NameInput extends Actor {
+    game
+    alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    selectedLetter = 0
+    letterLabel = null;
+    thisTag;
+    gpadY = 0
+    bpress = false
+    stickMovedY = false
+
     constructor(pos, index) {
         super({
             pos: pos,
@@ -13,11 +23,6 @@ export class NameInput extends Actor {
         this.addTag(`${index}`);
         this.name = "Nameslot"
     }
-
-    alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-    selectedLetter = 0
-    letterLabel = null;
-    thisTag;
 
 
     onInitialize() {
@@ -35,16 +40,21 @@ export class NameInput extends Actor {
     }
 
     onPreUpdate(engine) {
+        if (Game.gpad != null) {
+            this.gpadY = Game.gpad.getAxes(Axes.LeftStickY)
+            this.bpress = Game.gpad.isButtonPressed(Buttons.Face1);
+        }
+
         if (this.thisTag == this.scene.selectedLetterSlot) {
             this.color = Color.Green
-            if (engine.input.keyboard.wasPressed(Keys.Down)) {
+            if (engine.input.keyboard.wasPressed(Keys.Down) || this.gpadY < 0 && this.stickMovedY === false) {
                 if (this.selectedLetter > 24) {
                     this.selectedLetter = -1
                 }
                 this.selectedLetter++
                 this.letterLabel.text = this.alphabet[this.selectedLetter]
             }
-            if (engine.input.keyboard.wasPressed(Keys.Up)) {
+            if (engine.input.keyboard.wasPressed(Keys.Up) || this.gpadY > 0 && this.stickMovedY === false) {
                 if (this.thisTag == this.scene.selectedLetterSlot) {
                     if (this.selectedLetter < 1) {
                         this.selectedLetter = 26
@@ -61,6 +71,12 @@ export class NameInput extends Actor {
             this.color = Color.Green
         } else if (this.scene.nameConfirmed === false && !this.thisTag === this.scene.selectedLetterSlot) {
             this.color = Color.Gray
+        }
+
+        if (this.gpadY != 0) {
+            this.stickMovedY = true;
+        } else {
+            this.stickMovedY = false;
         }
     }
 }

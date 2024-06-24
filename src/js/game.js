@@ -7,7 +7,7 @@ import { StartScreen } from './startScreen.js'
 import { Endscene } from './endScene.js'
 
 export class Game extends Engine {
-    static gpad=null;
+    static gpad = null;
     static game;
     constructor() {
         super({
@@ -20,6 +20,14 @@ export class Game extends Engine {
     }
 
     startGame() {
+        this.input.gamepads.enabled = true;
+        this.input.gamepads.on('connect', (connectevent) => {
+            console.log("gamepad detected")
+            Game.gpad = connectevent.gamepad
+            Game.controller = connectevent.controller;
+        })
+        Game.game = this;
+
         console.log("start de game!")
         this.level = new Level()
         this.startScreen = new StartScreen()
@@ -28,17 +36,9 @@ export class Game extends Engine {
         this.add('endscene', this.endScene)
         this.add('level', this.level)
         this.goToScene('startScreen')
-        this.backgroundColor = Color.fromRGB(52,103,255);
-      //this.toggleDebug()
-   
-     
-      this.input.gamepads.enabled = true;
-      this.input.gamepads.on('connect', (connectevent) => {
-          console.log("gamepad detected")
-          Game.gpad = connectevent.gamepad
-          Game.controller = connectevent.controller;
-      })
-      Game.game = this;
+        this.backgroundColor = Color.fromRGB(52, 103, 255);
+        //this.toggleDebug()
+
     }
 }
 
