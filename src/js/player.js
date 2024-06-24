@@ -72,7 +72,7 @@ export class Player extends Actor {
         Player.playerPos = this.pos
         Player.playerVel = this.vel;
 
-        console.log(Player.playerPos);
+     //   console.log(Player.playerPos);
         this.pos.x = clamp(this.pos.x,-1385,1385)
 
         if(!Player.isGoku)
