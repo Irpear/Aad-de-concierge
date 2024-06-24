@@ -16,6 +16,7 @@ export class platformManager extends Actor
     minX = -575
     maxX = 575
     
+    maxPlatformPos=-22200;
     timer
 
     constructor(timer)
@@ -43,7 +44,9 @@ export class platformManager extends Actor
         super.onInitialize()
         for(let i = 0;i<100;i++)
         {
-        this.spawnNextPlatform();
+            if(this.platforms[this.platforms.length-1].pos.y>=this.maxPlatformPos){
+                this.spawnNextPlatform();
+            }
         }
         let endPlatform = new endPoint(this.timer)
         endPlatform.pos = new Vector(this.pox,this.poy-32);
