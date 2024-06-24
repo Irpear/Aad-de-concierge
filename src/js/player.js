@@ -94,8 +94,14 @@ export class Player extends Actor {
         //console.log(this.vel)
         this.xspeed = 0;
         this.yspeed = 0;
-        let gpadX =  Game.gpad.getAxes(Axes.LeftStickX)
-        let gpadY = Game.gpad.getAxes(Axes.LeftStickY)
+        let gpadX = 0;
+        let gpadY = 0;
+        let bpress = false;
+        if(Game.gpad!=null){
+        gpadX =  Game.gpad.getAxes(Axes.LeftStickX)
+        gpadY = Game.gpad.getAxes(Axes.LeftStickY)
+        bpress = Game.gpad.isButtonPressed(Buttons.Face1);
+        }
         if (engine.input.keyboard.isHeld(Keys.Left) || engine.input.keyboard.isHeld(Keys.A) || gpadX<0) {
             this.xspeed = -500
         }
@@ -109,7 +115,7 @@ export class Player extends Actor {
             this.yspeed = 1500
         }
         // When the Spacebar is pressed jump 
-        this.doJump = engine.input.keyboard.wasPressed(Keys.Space) || Game.gpad.isButtonPressed(Buttons.Face1);
+        this.doJump = engine.input.keyboard.wasPressed(Keys.Space) || bpress;
     }
     // Calculate and apply velocity
     pMove(delta) {
