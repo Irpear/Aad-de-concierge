@@ -1,3 +1,4 @@
+// @ts-nocheck
 
 import { Actor, Color, Font, Keys, Label, Scene, Timer, Vector } from "excalibur";
 import { NameInput } from "./nameInput";
@@ -124,7 +125,7 @@ export class StartScreen extends Scene {
             }),
         });
 
-        // Center the button text within the button
+        startButton.addTag("startButton")
         startButtonText.anchor = new Vector(0.5, 0.5);
         startButton.addChild(startButtonText);
 
@@ -222,6 +223,8 @@ export class StartScreen extends Scene {
 
         if (engine.input.keyboard.wasPressed(Keys.Down)) {
             if (StartScreen.selectedDifficulty >= 0) {
+                const startButton = this.actors.find(actor => actor.hasTag('startButton'));
+                startButton.color = Color.Green
                 if (!this.helpTextAdded) {
                     // Create and configure helping text
                     const startHelpText = new Label({
@@ -252,6 +255,8 @@ export class StartScreen extends Scene {
             this.difficultyConfirmed = false
             this.blinkTimer.stop()
             startHelpText.text = ""
+            const startButton = this.actors.find(actor => actor.hasTag('startButton'));
+            startButton.color = Color.Gray
         }
     }
     blinkingHandler() {
@@ -262,4 +267,5 @@ export class StartScreen extends Scene {
             startHelpText.text = '🇵​​​​​🇷​​​​​🇪​​​​​🇸​​​​​🇸​​​​​ 🇪​​​​​🇳​​​​​🇹​​​​​🇪​​​​​🇷​​​​​ 🇹​​​​​🇴​​​​​ 🇸​​​​​🇹​​​​​🇦​​​​​🇷​​​​​🇹​​​​​'
         }
     }
+
 }
