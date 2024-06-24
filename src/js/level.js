@@ -1,4 +1,4 @@
-import { Color, CoordPlane, FontUnit, Label, Scene, Vector, Actor, Shape, CollisionType, CollisionGroup } from "excalibur";
+import { Color, CoordPlane, FontUnit, Label, Scene, Vector, Actor, Shape, CollisionType, CollisionGroup, Resource } from "excalibur";
 import { Background } from "./background";
 import { Player } from "./player";
 import { Projectile } from "./projectile";
@@ -84,6 +84,7 @@ export class Level extends Scene {
 
         let BirdSpawner = new birdSpawner();
         this.add(BirdSpawner);
+        Resources.Background.play(0.5)
     }
 
 
