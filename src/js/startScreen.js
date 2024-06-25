@@ -247,51 +247,51 @@ export class StartScreen extends Scene {
             startHelpText.text = '🇵​​​​​🇷​​​​​🇪​​​​​🇸​​​​​🇸​​​​​ 🇧​​​​​🇺​​​​​🇹​​​​​🇹​​​​​🇴​​​​​🇳​​​-𝟭 🇴​​​​​🇷​​​​​ 🇪​​​​​🇳​​​​​🇹​​​​​🇪​​​​​🇷​​​​​ 🇹​​​​​🇴​​​​​ 🇸​​​​​🇹​​​​​🇦​​​​​🇷​​​​​🇹​​​​​​​​​​'
         }
     }
-    startGame() {
-        StartScreen.playerName = '';
-        // Collect the player's name from the inputs
-        for (let i = 0; i < this.inputs.length; i++) {
-            StartScreen.playerName += this.inputs[i].alphabet[this.inputs[i].selectedLetter];
-        }
-        switch (StartScreen.selectedDifficulty) {
-            case 0:
-                Endscene.difficultyString = "Easy"
-                projectileSpawner.spawnInterval = 10;
-                birdSpawner.spawnInterval = 20;
+    // startGame() {
+    //     StartScreen.playerName = '';
+    //     // Collect the player's name from the inputs
+    //     for (let i = 0; i < this.inputs.length; i++) {
+    //         StartScreen.playerName += this.inputs[i].alphabet[this.inputs[i].selectedLetter];
+    //     }
+    //     switch (StartScreen.selectedDifficulty) {
+    //         case 0:
+    //             Endscene.difficultyString = "Easy"
+    //             projectileSpawner.spawnInterval = 10;
+    //             birdSpawner.spawnInterval = 20;
 
-                break;
-            case 1:
-                Endscene.difficultyString = "Normal"
-                projectileSpawner.spawnInterval = 7.5;
-                birdSpawner.spawnInterval = 15;
+    //             break;
+    //         case 1:
+    //             Endscene.difficultyString = "Normal"
+    //             projectileSpawner.spawnInterval = 7.5;
+    //             birdSpawner.spawnInterval = 15;
 
-                break;
-            case 2:
-                Endscene.difficultyString = "Hard"
-                projectileSpawner.spawnInterval = 5;
-                birdSpawner.spawnInterval = 10;
+    //             break;
+    //         case 2:
+    //             Endscene.difficultyString = "Hard"
+    //             projectileSpawner.spawnInterval = 5;
+    //             birdSpawner.spawnInterval = 10;
 
-                break;
-            default:
-                Endscene.difficultyString = "Normal"
-                projectileSpawner.spawnInterval = 7.5;
-                birdSpawner.spawnInterval = 15;
-                break;
-        }
-        switch (StartScreen.playerName) {
-            default:
-                Player.isGoku = false;
-                Endscene.modeString = "";
-                this.engine.goToScene('level');
-                break;
-            case "GOKU":
-                Endscene.modeString = "Goku-mode";
-                Player.isGoku = true;
-                this.engine.goToScene('level');
-                break;
-        }
+    //             break;
+    //         default:
+    //             Endscene.difficultyString = "Normal"
+    //             projectileSpawner.spawnInterval = 7.5;
+    //             birdSpawner.spawnInterval = 15;
+    //             break;
+    //     }
+    //     switch (StartScreen.playerName) {
+    //         default:
+    //             Player.isGoku = false;
+    //             Endscene.modeString = "";
+    //             this.engine.goToScene('level');
+    //             break;
+    //         case "GOKU":
+    //             Endscene.modeString = "Goku-mode";
+    //             Player.isGoku = true;
+    //             this.engine.goToScene('level');
+    //             break;
+    //     }
 
-    }
+    // }
     startGame() {
         StartScreen.playerName = '';
         // Collect the player's name from the inputs
@@ -313,8 +313,8 @@ export class StartScreen extends Scene {
                 break;
             case 2:
                 Endscene.difficultyString = "Hard"
-                projectileSpawner.spawnInterval = 6.5;
-                birdSpawner.spawnInterval = 12.5;
+                projectileSpawner.spawnInterval = 6;
+                birdSpawner.spawnInterval = 11;
 
                 break;
             default:
